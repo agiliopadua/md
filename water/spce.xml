@@ -1,0 +1,12 @@
+<ForceField>
+ <Atoms>
+  <Atom type="Ow" class="Ow" mass="15.999" charge="-0.8476" potential="lj" sigma="3.1655" epsilon="0.6503" />
+  <Atom type="Hw" class="Hw" mass="1.008" charge="0.4238" potential="lj" sigma="0.0000" epsilon="0.0000" />
+ </Atoms>
+ <Bonds>
+  <Bond class1="Ow" class2="Hw" potential="cons" length="1.000" k="4331.53" />
+ </Bonds>
+ <Angles>
+  <Angle class1="Hw" class2="Ow" class3="Hw" potential="harm" angle="109.47" k="317.57" />
+ </Angles>
+</ForceField>
