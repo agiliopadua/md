@@ -1,4 +1,4 @@
-# LJATOMS
+# ljatoms
 
 Simple MD code for Lennard-Jones atoms (rare gases)
 
