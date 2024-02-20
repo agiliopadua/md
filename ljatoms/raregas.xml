@@ -1,0 +1,9 @@
+<ForceField>
+ <Atoms>
+  <Atom type="He" class="He" mass="4.0026" charge="0.00" potential="lj" sigma="2.628" epsilon="0.0454" />
+  <Atom type="Ne" class="Ne" mass="20.180" charge="0.00" potential="lj" sigma="2.801" epsilon="0.282" />
+  <Atom type="Ar" class="Ar" mass="39.948" charge="0.00" potential="lj" sigma="3.3952" epsilon="0.9710" />
+  <Atom type="Kr" class="Kr" mass="83.798" charge="0.00" potential="lj" sigma="3.6274" epsilon="1.3518" />
+  <Atom type="Xe" class="Xe" mass="131.29" charge="0.00" potential="lj" sigma="3.949" epsilon="1.8802" />
+ </Atoms>
+</ForceField>
