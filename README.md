@@ -1,6 +1,6 @@
 # MD
 
-Course on molecular dynamics, 1st yr masters in Physical Sciences -- Sciences de la Matière, ENS de Lyon.
+Course on molecular dynamics, 1st yr masters in Physical Sciences - Sciences de la Matière, ENS de Lyon.
 
 ## Working environment and codes
 
@@ -23,3 +23,4 @@ In order to activate the **conda** installation in `/projects/DepartementChimie/
 ## Study cases
 
 `ljatoms` - simple MD code for Lennard-Jones atoms
+`water` - MD simulation of water using LAMMPS

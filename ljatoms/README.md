@@ -18,7 +18,7 @@ A very basic MD code contains the following routines/elements:
 
 Some remarks:
 - Force and energy calculations need to account for the periodic boundary conditions.
-- Interactions need to be considered explicitly only up to a cutoff distance of around $3\sigma \approx 12\ \mathrm{\AA}$.
+- Interactions need to be considered explicitly only up to a cutoff distance of around $3\sigma \approx 12$ Å.
 - Attention must be paid to the **units** in the calculation of energies and forces, and in the integrator.
 
 Routines to read and write PDB files are supplied, as well as the LJ potential parameters of the rare gases.
