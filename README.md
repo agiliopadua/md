@@ -22,5 +22,5 @@ In order to activate the **conda** installation in `/projects/DepartementChimie/
 
 ## Study cases
 
-`ljatoms` - simple MD code for Lennard-Jones atoms
-`water` - MD simulation of water using LAMMPS
+- `ljatoms` - simple MD code for Lennard-Jones atoms
+- `water` - simulation of water using LAMMPS

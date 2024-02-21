@@ -1,12 +1,12 @@
 # WATER
 
-MD simulation of water using a 3-site model.
+MD simulation of water, the most important liquid!
 
 ## Three-site water models
 
-The simplest, realistic models of water consist of three sites, corresponding to the O and H atoms. They are usually labelled Ow and Hw to distinguish them from oxygen and hydrogen sites on other compounds. In 3-site water models, the Ow atom has a LJ site and a negative partial charge, and the Hw atoms have just positive partial charges (no LJ sites: the Hw are embedded in the van der Waals radius of the Ow, which corresponds to the entire water molecule).
+The simplest realistic models of water consist of three sites corresponding to the O and H atoms. They are usually labelled Ow and Hw to distinguish them from oxygen and hydrogen sites on other compounds. In 3-site water models, the Ow atom has a LJ site and a negative partial charge, and the Hw atoms have just positive partial charges (no LJ sites: the Hw are embedded in the van der Waals radius of the site placed on the Ow, which accounts for the entire water molecule).
 
-The SPCE model is one of the popular 3-site water models [1,2]. It is a rigid model, but some variants can have a flexible HOH angle [3] (a flexible OH bond is less relevant).
+The SPCE model is one of the popular 3-site water models [[1](#spce),[2](#opc3)]. It is a rigid model, but some variants can have a flexible HOH angle [[3](#flex)] (a flexible OH bond is less relevant).
 
 ## Objective
 
@@ -37,7 +37,7 @@ Visualize your system using **VMD**.
 
 ## References
 
-1. [Berendsen, H. J. C.; Grigera, J. R.; Straatsma, T. P. The Missing Term in Effective Pair Potentials. *J. Phys. Chem.* 1987, 91 (24), 6269–6271.](https://doi.org/10.1021/j100308a038)
-2. [Izadi, S.; Onufriev, A. V. Accuracy Limit of Rigid 3-Point Water Models. *J. Chem. Phys.* 2016, 145 (7), 074501.](https://doi.org/10.1063/1.4960175)
-3. [Wu, Y.; Tepper, H. L.; Voth, G. A. Flexible Simple Point-Charge Water Model with Improved Liquid-State Properties. The Journal of Chemical Physics 2006, 124 (2), 24503–24503.](https://doi.org/10.1063/1.2136877)
+1. <a id="spce" /> Berendsen, H. J. C.; Grigera, J. R.; Straatsma, T. P. The Missing Term in Effective Pair Potentials. *J. Phys. Chem.* 1987, 91 (24), 6269–6271. DOI: [10.1021/j100308a038](https://doi.org/10.1021/j100308a038)
+2. <a id="opc3" /> Izadi, S.; Onufriev, A. V. Accuracy Limit of Rigid 3-Point Water Models. *J. Chem. Phys.* 2016, 145 (7), 074501. DOI: [10.1063/1.4960175](https://doi.org/10.1063/1.4960175)
+3. <a id="flex" /> Wu, Y.; Tepper, H. L.; Voth, G. A. Flexible Simple Point-Charge Water Model with Improved Liquid-State Properties. The Journal of Chemical Physics 2006, 124 (2), 24503–24503. DOI: [10.1063/1.2136877]](https://doi.org/10.1063/1.2136877)
 
