@@ -12,15 +12,16 @@ In order to activate the **conda** installation in `/projects/DepartementChimie/
 
 ### Codes
 
-- LAMMPS: /projects/DepartementChimie/lammps/bin/lmp
-- packmol: /usr/bin/packmol (in the PATH)
-- VMD: /usr/local/bin/vmd (in the PATH)
-- Avogadro: /usr/bin/avogadro (in the PATH)
-- Gromacs: /usr/bin/gmx (in the PATH)
-- OpenMM, mdtraj: `conda activate omm`
+* LAMMPS: /projects/DepartementChimie/lammps/bin/lmp
+* packmol: /usr/bin/packmol (in the PATH)
+* VMD: /usr/local/bin/vmd (in the PATH)
+* Avogadro: /usr/bin/avogadro (in the PATH)
+* Gromacs: /usr/bin/gmx (in the PATH)
+* OpenMM, mdtraj: `conda activate omm`
 
 
 ## Study cases
 
-- `ljatoms` - simple MD code for Lennard-Jones atoms
-- `water` - simulation of water using LAMMPS
+* `ljatoms` -- simple MD code for Lennard-Jones atoms
+* `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
+* `water` -- simulation of water using LAMMPS

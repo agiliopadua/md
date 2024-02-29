@@ -24,8 +24,8 @@ A very basic MD code contains the following routines/elements:
 
 Some remarks:
 - Force and energy calculations need to account for the periodic boundary conditions.
-- Interactions need to be considered explicitly only up to a cutoff distance of around $3\sigma \approx 12$ Å.
-- Attention must be paid to the **units** in the calculation of energies and forces, and in the integrator.
+- Interactions need to be considered explicitly only up to a cutoff distance above $3\sigma$, usually 12 Å.
+- Attention must be paid to the **units** in the calculation of energies and forces, as well as in the integrator.
 - **Avogadro** is a handy tool to create an initial PDB file with some atoms (add the box with \<Crystallography>\<Add Unit Cell>, 30 Å side for example).
 
 Python routines to read and write PDB files are supplied, as well as the LJ potential parameters for the rare gases.
@@ -33,6 +33,10 @@ Python routines to read and write PDB files are supplied, as well as the LJ pote
 
 ## Contents
 
-- `raregas.json` - LJ parameters of the rare gases
-- `raregas.xml` - force field database for the rare gases
-- `md_pdb.py` - functions to read and write PDB files
+### To write a minimal MD code
+* `mdatoms_pdb.py` -- functions to read and write PDB files
+* `raregas.json` -- LJ parameters of the rare gases
+* `sim.json` -- simulation parameters
+
+### To check using LAMMPS
+* `raregas.xml` -- force field database for the rare gases

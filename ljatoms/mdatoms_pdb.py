@@ -2,6 +2,7 @@
 # Molecular dynamics of LJ atoms
 
 import sys
+import argparse
 import numpy as np
 
 
@@ -13,8 +14,8 @@ def readpdb(pdbfile):
 
     Returns:
         box (ndarray): Lx, Ly, Lz box lengths
-        atnames (list): array with N atom names
-        r (ndarray): [N,3] array with coordinates
+        atnames (list): N atom names
+        r (ndarray): [N, 3] coordinates
     """
 
     cell = '0.0 0.0 0.0'
@@ -29,7 +30,6 @@ def readpdb(pdbfile):
             atom['y'] = float(line[38:46])
             atom['z'] = float(line[46:54])
             atoms.append(atom)
-    natom = len(atoms)
 
     box = np.array([float(cell[0]), float(cell[1]), float(cell[2])])
     atnames = [atom['name'] for atom in atoms]
@@ -38,14 +38,14 @@ def readpdb(pdbfile):
 
 
 def writepdb(pdbfile, step, box, atnames, r, mode='a'):
-    """Write PDB file
+    """Write or append PDB file
 
     Args:
         pdbfile (string): PDB file name
         step (int): time step
         box (ndarray): Lx, Ly, Lz box lengths
-        atnames (list): array with atom names
-        r (ndarray): [N,3] array with N coordinates
+        atnames (list): N atom names
+        r (ndarray): [N, 3] coordinates
         mode (str, optional): 'w' write, 'a' append. Defaults to 'a'
     """
 
@@ -67,19 +67,19 @@ def writepdb(pdbfile, step, box, atnames, r, mode='a'):
 
 def main():
 
-    if len(sys.argv) == 1:
-        print(sys.argv[0] + ' pdbfile' + ' outfile' + ' [a|w]')
-        exit()
+    parser = argparse.ArgumentParser(description='Molecular dynamics of LJ atoms')
+    parser.add_argument('--ini', help='PDB file with initial configuration')
+    parser.add_argument('--last', default='last.pdb', help='final configuration (default: last.pdb)')
+    args = parser.parse_args()
 
-    infile = sys.argv[1]
-    outfile = sys.argv[2]
-    if len(sys.argv) == 4:
-        mode = sys.argv[3]
-    else:
-        mode = 'a'
+    if not args.ini:
+        parser.print_help()
+        print('\nError: supply initial configuration file')
+        sys.exit(1)
 
-    box, atnames, r = readpdb(infile)
-    writepdb(outfile, box, atnames, r, mode)
+    box, atnames, r = readpdb(args.ini)
+    step = 0
+    writepdb(args.last, step, box, atnames, r, mode='a')
 
 if __name__ == '__main__':
     main()
