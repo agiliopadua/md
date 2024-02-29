@@ -37,6 +37,7 @@ Python routines to read and write PDB files are supplied, as well as the LJ pote
 * `mdatoms_pdb.py` -- functions to read and write PDB files
 * `raregas.json` -- LJ parameters of the rare gases
 * `sim.json` -- simulation parameters
+* `pbc.vmd` -- show box and wrap coordinates (`vmd -e pbc.vmd file.pdb`)
 
 ### To check using LAMMPS
 * `raregas.xml` -- force field database for the rare gases
