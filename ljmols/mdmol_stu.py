@@ -99,9 +99,6 @@ def writepdb(pdbfile, step, box, atnames, r, bonds, mode='a'):
 #   energy [kJ/mol]
 #   force [(kJ/mol)/A]
 
-kBoltz = cst.R * 1e-3   # [(kJ/mol)/K]
-bondTol = 0.25          # bond tolerance [A]
-
 
 def ljparams(atnames, ffnonbond):
     """Set non-bonded LJ parameters 
@@ -181,19 +178,21 @@ def initvel(m, temp):
 
 # -------------------------------------
 
-def ekinetic(v, m):
+def ekinetic(m, v):
     """Compute kinetic energy
 
     Args:
-        v (ndarray): [N, 3] velocities
         m (ndarray): column array with N atomic masses
+        v (ndarray): [N, 3] velocities
 
     Returns:
         kinetic energy (float)
+        temperature (float)
     """    
 
     ekin = 0.0                          # TODO replace by expression
-    return ekin
+    temp = 0.0                          # TODO replace by expression
+    return ekin, temp
 
 
 def epot_pair(r, sig, eps, excl, box, rcut):
@@ -218,26 +217,6 @@ def epot_pair(r, sig, eps, excl, box, rcut):
         for j in range(i + 1, natom):
 #           ...
             epot += 0.0                 # TODO replace by expression
-    return epot
-
-
-def epot_bond(r, bonds, box):
-    """Compute bonded potential energy
-
-    Args:
-        r (ndarray): [N, 3] positions
-        bonds (array): {i, j, r0, kr} for all bonds
-        excl (array): exclusion list
-
-    Returns:
-        epot (float): bonded potential energy
-    """    
-
-    epot = 0.0
-    for bd in bonds:
-        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
-#        ...                            
-        epot += 0.0                     # TODO replace by expression
     return epot
 
 
@@ -268,6 +247,26 @@ def forces_pair(r, sig, eps, box, rcut, excl):
     return f
 
 
+def epot_bond(r, bonds, box):
+    """Compute bonded potential energy
+
+    Args:
+        r (ndarray): [N, 3] positions
+        bonds (array): {i, j, r0, kr} for all bonds
+        excl (array): exclusion list
+
+    Returns:
+        epot (float): bonded potential energy
+    """    
+
+    epot = 0.0
+    for bd in bonds:
+        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
+#        ...                            
+        epot += 0.0                     # TODO replace by expression
+    return epot
+
+
 def forces_bond(r, bonds, box):
     """Compute bonded forces (harmonic bonds)
 
@@ -288,6 +287,27 @@ def forces_bond(r, bonds, box):
         fij = [0.0, 0.0, 0.0]           # TODO replace by expression
 #       ...
     return f           
+
+
+def pressure(r, f, temp, box):
+    """Compute pressure from virial
+
+    Args:
+        r (ndarray): [N, 3] coordinates
+        f (ndarray): [N, 3] forces
+        temp (float): temperature
+        box (ndarray): 3 box lengths
+
+    Returns:
+        pressure [bar]
+    """
+
+    n = len(r)
+    vol = np.prod(box) * 1e-30  # [m3]
+    virial = np.sum(f * r) / 2
+    p = (n * cst.k * temp / vol \
+        + virial * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+    return p
 
 # -------------------------------------
 
@@ -326,17 +346,18 @@ def main():
     step = 0
     v = initvel(m, sim['temp'])
 
-    print('# Step          Etot          Ekin          Epot         Ebond         Epair')
+    print('# Step          Etot          Ekin          Epot         Ebond         Epair     Temp    Press')
     ebond = epot_bond(r, bonds, box)
     epair = epot_pair(r, sig, eps, excl, box, rcut)
-    ekin = ekinetic(v, m)
+    ekin, temp = ekinetic(m, v)
     epot = epair + ebond
     etot = ekin + epot
-    print(f'{0:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f}')
-
     fbond = forces_bond(r, bonds, box)
     fpair = forces_pair(r, sig, eps, box, rcut, excl)
     f = fbond + fpair
+    press = pressure(r, f, temp, box)
+    print(f'{0:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
+
     writepdb(args.traj, step, box, atnames, r, bonds, 'w')
 
     tstart = time.perf_counter_ns()
@@ -347,10 +368,11 @@ def main():
         if step % sim['save'] == 0:
             ebond = epot_bond(r, bonds, box)
             epair = epot_pair(r, sig, eps, excl, box, rcut)
-            ekin = ekinetic(v, m)
+            ekin, temp = ekinetic(m, v)
             epot = epair + ebond
             etot = ekin + epot
-            print(f'{step:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f}')
+            press = pressure(r, f, temp, box)          
+            print(f'{step:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
             writepdb(args.traj, step, box, atnames, r, bonds, 'a')
 
     tend = time.perf_counter_ns()

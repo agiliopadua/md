@@ -1,5 +1,3 @@
-# mol new dump.lammpstrj waitfor all
-
 display projection orthographic
 display nearclip set 0.01
 display depthcue off

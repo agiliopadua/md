@@ -78,8 +78,6 @@ def writepdb(pdbfile, step, box, atnames, r, mode='a'):
 #   energy [kJ/mol]
 #   force [(kJ/mol)/A]
 
-kBoltz = cst.R * 1e-3    # [(kJ/mol)/K]
-
 
 def ljparams(atnames, forcefield):
     """Set non-bonded LJ parameters
@@ -129,19 +127,21 @@ def initvel(m, temp):
 
 # -------------------------------------
 
-def ekinetic(v, m):
+def ekinetic(m, v):
     """Compute kinetic energy
 
     Args:
-        v (ndarray): [N, 3] velocities
         m (ndarray): column array with N atomic masses
+        v (ndarray): [N, 3] velocities
 
     Returns:
         kinetic energy (float)
+        temperature (float)
     """
 
     ekin = 0.0                          # TODO replace by expression
-    return ekin
+    temp = 0.0                          # TODO replace by expression
+    return ekin, temp
 
 
 def epotential(r, sig, eps, box, rcut):
@@ -195,6 +195,27 @@ def forces(r, sig, eps, box, rcut):
     return f
 
 
+def pressure(r, f, temp, box):
+    """Compute pressure from virial
+
+    Args:
+        r (ndarray): [N, 3] coordinates
+        f (ndarray): [N, 3] forces
+        temp (float): temperature
+        box (ndarray): 3 box lengths
+
+    Returns:
+        pressure [bar]
+    """
+
+    n = len(r)
+    vol = np.prod(box) * 1e-30  # [m3]
+    virial = np.sum(f * r) / 2
+    p = (n * cst.k * temp / vol \
+      + virial * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+    return p
+
+
 # -------------------------------------
 
 def main():
@@ -226,13 +247,14 @@ def main():
     step = 0
     v = initvel(m, sim['temp'])
 
-    print('# Step      Etotal        Ekin          Epot')
+    print('# Step      Etotal        Ekin          Epot        Temp     Press')
     epot = epotential(r, sig, eps, box, rcut)
-    ekin = ekinetic(v, m)
+    ekin, temp = ekinetic(m, v)
     etot = ekin + epot
-    print(f'{0:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f}')
-
     f = forces(r, sig, eps, box, rcut)
+    press = pressure(r, f, temp, box)
+    print(f'{0:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
+
     writepdb(args.traj, step, box, atnames, r, 'w')
 
     tstart = time.perf_counter_ns()
@@ -242,9 +264,10 @@ def main():
 
         if step % sim['save'] == 0:
             epot = epotential(r, sig, eps, box, rcut)
-            ekin = ekinetic(v, m)
+            ekin, temp = ekinetic(m, v)
             etot = ekin + epot
-            print(f'{step:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f}')
+            press = pressure(r, f, temp, box)
+            print(f'{step:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
             writepdb(args.traj, step, box, atnames, r, 'a')
 
     tend = time.perf_counter_ns()
