@@ -16,6 +16,7 @@ In order to activate the **conda** installation in `/projects/DepartementChimie/
 * packmol: /usr/bin/packmol (in the PATH)
 * VMD: /usr/local/bin/vmd (in the PATH)
 * Avogadro: /usr/bin/avogadro (in the PATH)
+* Open Babel: /usr/bin/obabel
 * Gromacs: /usr/bin/gmx (in the PATH)
 * OpenMM, mdtraj: `conda activate omm`
 

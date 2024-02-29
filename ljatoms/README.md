@@ -14,21 +14,21 @@ The configurations of the system are stored in the PDB format, one of the most w
 
 A very basic MD code contains the following routines/elements:
 
-- read an initial configuration (PDB file)
-- read interaction parameters (JSON file)
-- input simulation conditions (temperature, time step, number of timesteps, delay between saving trajectory snapshots, cutoff distance)
-- compute the energy (potential and kinetic)
-- compute forces
-- integrate the equations of motion
-- write configurations at selected time steps
+1. Read an initial configuration (PDB file).
+2. Read interaction parameters (JSON file).
+3. Input simulation conditions, such as temperature, time step, number of timesteps, delay between saving trajectory snapshots, cutoff distance, etc. (JSON file)
+4. Compute forces.
+5. Integrate the equations of motion.
+6. Compute energies (kinetic and potential).
+7. Compute temperature and pressure.
+8. Write configurations at selected time steps.
 
 Some remarks:
-- Force and energy calculations need to account for the periodic boundary conditions.
-- Interactions need to be considered explicitly only up to a cutoff distance above $3\sigma$, usually 12 Å.
-- Attention must be paid to the **units** in the calculation of energies and forces, as well as in the integrator.
-- **Avogadro** is a handy tool to create an initial PDB file with some atoms (add the box with \<Crystallography>\<Add Unit Cell>, 30 Å side for example).
-
-Python routines to read and write PDB files are supplied, as well as the LJ potential parameters for the rare gases.
+* Force and energy calculations need to account for the periodic boundary conditions.
+* Interactions need to be considered explicitly only up to a cutoff distance slightly above $3\sigma$, usually 12 Å.
+* Attention must be paid to the **units** in the calculation of energies and forces, as well as in the integrator.
+* **Avogadro** is a handy tool to create an initial PDB file with some atoms (add the box with \<Crystallography>\<Add Unit Cell>, 30 Å side for example).
+* **Packmol** can be used to pack a simulation box with a number of molecules (one has to provide a PDB file with one atom/molecule).
 
 
 ## Contents
@@ -37,5 +37,5 @@ Python routines to read and write PDB files are supplied, as well as the LJ pote
 * `mdatom_stu.py` -- MD code to complete
 * `raregas.json` -- LJ parameters of rare gases
 * `sim.json` -- simulation parameters
-* `pack.inp` -- build system with many atoms (`packmol < pack.inp`)
+* `pack.inp` -- fill box with many atoms (`packmol < pack.inp`)
 * `pbc.vmd` -- show box and wrap coordinates (`vmd -e pbc.vmd file.pdb`)
