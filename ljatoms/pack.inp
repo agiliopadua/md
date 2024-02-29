@@ -1,0 +1,9 @@
+# created by fftool
+tolerance 2.5
+filetype pdb
+output simbox.pdb
+
+structure argon.pdb
+  number 100
+  inside box 1.5000 1.5000 1.5000 28.5000 28.5000 28.5000
+end structure

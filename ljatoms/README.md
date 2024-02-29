@@ -34,11 +34,8 @@ Python routines to read and write PDB files are supplied, as well as the LJ pote
 ## Contents
 
 ### To write a minimal MD code
-* `mdatoms_pdb.py` -- functions to read and write PDB files
-* `raregas.json` -- LJ parameters of the rare gases
+* `mdatom_stu.py` -- MD code to complete
+* `raregas.json` -- LJ parameters of rare gases
 * `sim.json` -- simulation parameters
+* `pack.inp` -- build system with many atoms (`packmol < pack.inp`)
 * `pbc.vmd` -- show box and wrap coordinates (`vmd -e pbc.vmd file.pdb`)
-
-### To check using LAMMPS
-* `raregas.xml` -- force field database for the rare gases (for fftool)
-* `argon.xyz` -- molecule input file (for fftool)
