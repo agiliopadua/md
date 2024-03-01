@@ -214,7 +214,7 @@ def pressure(natom, vir, temp, box):
 
     vol = np.prod(box) * 1e-30  # [m3]
     p = (natom * cst.k * temp / vol \
-        - vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+        + vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
     return p
 
 
