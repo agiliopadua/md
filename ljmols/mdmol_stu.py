@@ -233,18 +233,22 @@ def forces_pair(r, sig, eps, box, rcut, excl):
 
     Returns:
         f (ndarray): [N, 3] non-bonded forces
+        vir (float): the virial
     """
 
     natom = len(r)
     f = np.zeros((natom, 3))
+    vir = 0.0
     rcut2 = rcut*rcut
     for i in range(natom - 1):
         for j in range(i + 1, natom):
             rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
 #           ...
             fij = [0.0, 0.0, 0.0]       # TODO replace by expression
-#           ...
-    return f
+            f[i] -= fij
+            f[j] += fij
+            vir += np.sum(rij * fij)
+    return f, vir
 
 
 def epot_bond(r, bonds, box):
@@ -261,7 +265,7 @@ def epot_bond(r, bonds, box):
 
     epot = 0.0
     for bd in bonds:
-        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
+        rij = r[bd['j']] - r[bd['i']]   # [rij_x, rij_y, rij_z]
 #        ...                            
         epot += 0.0                     # TODO replace by expression
     return epot
@@ -282,19 +286,20 @@ def forces_bond(r, bonds, box):
     natom = len(r)
     f = np.zeros((natom, 3))
     for bd in bonds:
-        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
+        rij = r[bd['j']] - r[bd['i']]   # [rij_x, rij_y, rij_z]
 #       ...
         fij = [0.0, 0.0, 0.0]           # TODO replace by expression
-#       ...
-    return f           
+        f[bd['i']] -= fij
+        f[bd['j']] += fij
+    return f
 
 
-def pressure(r, f, temp, box):
+def pressure(natom, vir, temp, box):
     """Compute pressure from virial
 
     Args:
-        r (ndarray): [N, 3] coordinates
-        f (ndarray): [N, 3] forces
+        natom (int): number of atoms in system
+        vir (float): virial
         temp (float): temperature
         box (ndarray): 3 box lengths
 
@@ -302,11 +307,9 @@ def pressure(r, f, temp, box):
         pressure [bar]
     """
 
-    n = len(r)
     vol = np.prod(box) * 1e-30  # [m3]
-    virial = np.sum(f * r) / 2
-    p = (n * cst.k * temp / vol \
-        + virial * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+    p = (natom * cst.k * temp / vol \
+        + vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
     return p
 
 # -------------------------------------
@@ -328,7 +331,7 @@ def main():
         sys.exit(1)
 
     box, atnames, r, bonds = readpdb(args.ini)
-    natom = len(atnames)
+    nmol = len(atnames) - len(bonds)
 
     with open(args.ffnonbond) as f:
         forcefield = json.load(f)
@@ -353,9 +356,10 @@ def main():
     epot = epair + ebond
     etot = ekin + epot
     fbond = forces_bond(r, bonds, box)
-    fpair = forces_pair(r, sig, eps, box, rcut, excl)
+    fpair, vir = forces_pair(r, sig, eps, box, rcut, excl)
     f = fbond + fpair
-    press = pressure(r, f, temp, box)
+    press = pressure(nmol, vir, temp, box)
+
     print(f'{0:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
     sys.stdout.flush()
     writepdb(args.traj, step, box, atnames, r, bonds, 'w')
@@ -371,7 +375,8 @@ def main():
             ekin, temp = ekinetic(m, v)
             epot = epair + ebond
             etot = ekin + epot
-            press = pressure(r, f, temp, box)          
+            press = pressure(nmol, vir, temp, box)
+                    
             print(f'{step:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
             sys.stdout.flush()
             writepdb(args.traj, step, box, atnames, r, bonds, 'a')

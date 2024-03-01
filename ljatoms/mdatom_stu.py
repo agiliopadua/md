@@ -181,26 +181,30 @@ def forces(r, sig, eps, box, rcut):
 
     Returns:
         f (ndarray): [N, 3] forces
+        vir (double): the virial
     """
 
     natom = len(r)
     f = np.zeros((natom, 3))
+    vir = 0.0
     rcut2 = rcut*rcut
     for i in range(natom - 1):
         for j in range(i + 1, natom):
             rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
 #           ...
             fij = [0.0, 0.0, 0.0]       # TODO replace by expression
-#           ...
-    return f
+            f[i] -= fij
+            f[j] += fij
+        vir += np.sum(rij * fij)
+    return f, vir
 
 
-def pressure(r, f, temp, box):
+def pressure(natom, vir, temp, box):
     """Compute pressure from virial
 
     Args:
-        r (ndarray): [N, 3] coordinates
-        f (ndarray): [N, 3] forces
+        natom (int): number of atoms in system
+        vir (float): virial
         temp (float): temperature
         box (ndarray): 3 box lengths
 
@@ -208,11 +212,9 @@ def pressure(r, f, temp, box):
         pressure [bar]
     """
 
-    n = len(r)
     vol = np.prod(box) * 1e-30  # [m3]
-    virial = np.sum(f * r) / 2
-    p = (n * cst.k * temp / vol \
-      + virial * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+    p = (natom * cst.k * temp / vol \
+        + vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
     return p
 
 
@@ -234,7 +236,8 @@ def main():
         sys.exit(1)
 
     box, atnames, r = readpdb(args.ini)
-  
+    natom = len(atnames)
+
     with open(args.ff) as f:
         forcefield = json.load(f)
     m, sig, eps = ljparams(atnames, forcefield)
@@ -251,8 +254,9 @@ def main():
     epot = epotential(r, sig, eps, box, rcut)
     ekin, temp = ekinetic(m, v)
     etot = ekin + epot
-    f = forces(r, sig, eps, box, rcut)
-    press = pressure(r, f, temp, box)
+    f, vir = forces(r, sig, eps, box, rcut)
+    press = pressure(natom, vir, temp, box)
+    
     print(f'{0:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
     sys.stdout.flush()
     writepdb(args.traj, step, box, atnames, r, 'w')
@@ -266,7 +270,8 @@ def main():
             epot = epotential(r, sig, eps, box, rcut)
             ekin, temp = ekinetic(m, v)
             etot = ekin + epot
-            press = pressure(r, f, temp, box)
+            press = pressure(natom, vir, temp, box)
+
             print(f'{step:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
             sys.stdout.flush()
             writepdb(args.traj, step, box, atnames, r, 'a')

@@ -9,7 +9,7 @@ The aim of this study case is to write a very simple molecular dynamics code for
 
 ## Handling bonded and non-bonded forces
 
-The force field is composed of bonded and non-bonded terms (or, in other words, intra- and intermolecular potentials, in this example harmonic bond stretching and Lennard-Jones potential between atomic sites.
+The force field is composed of bonded and non-bonded terms (or, in other words, intra- and intermolecular potentials), in this example harmonic bond stretching and Lennard-Jones potential between atomic sites.
 
 Atoms belonging to the same molecule interact through a harmonic bond potential and do not interact through the LJ potential. Therefore, exclusion lists that identify which atoms are bonded to each one have to be setup.
 
@@ -28,4 +28,5 @@ Atoms belonging to the same molecule interact through a harmonic bond potential 
 
 ## Suggested runs
 
-* Run a few steps (200) with a timestep of 1 fs, to check if molecules behave as expected (bond vibrations, rotation). Test with different initial velocities (temperatures).
+* Take the `air.pdb` system and run a few steps (200) with a timestep of 1 fs, to check if molecules behave as expected (bond vibrations, rotation). Test with different initial velocities (temperatures).
+* Create a box of air with 100 molecules (30 Å cube): 79 N2 molecules, 20 O2 molecules and 1 Ar; run 2000 steps and compare the properties with those from [CoolProp](http://ibell.pythonanywhere.com).
