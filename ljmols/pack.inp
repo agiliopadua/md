@@ -1,0 +1,18 @@
+tolerance 2.5
+filetype pdb
+output simbox.pdb
+
+structure N2.pdb
+  number 79
+  inside box 1.5000 1.5000 1.5000 28.5000 28.5000 28.5000
+end structure
+
+structure O2.pdb
+  number 20
+  inside box 1.5000 1.5000 1.5000 28.5000 28.5000 28.5000
+end structure
+
+structure argon.pdb
+  number 1
+  inside box 1.5000 1.5000 1.5000 28.5000 28.5000 28.5000
+end structure

@@ -1,4 +1,3 @@
-# created by fftool
 tolerance 2.5
 filetype pdb
 output simbox.pdb

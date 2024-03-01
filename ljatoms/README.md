@@ -52,6 +52,6 @@ Some remarks:
 * Build a system with 100 atoms using **packmol** and run a trajectory of 20 000 steps starting with no initial velocities (T = 0 K):
     * Redirect output to a file (`> md.out &` at the end of the command line) in order to plot properties.
     * Check energy conservation.
-    * Compare the pVT properties obtained with those of argon in the same conditions of temperature and density using [CoolProp](http://ibell.pythonanywhere.com).
+    * Compare the pVT properties from simulation with those of argon in the same conditions of temperature and density using [CoolProp](http://ibell.pythonanywhere.com).
 
 

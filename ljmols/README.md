@@ -23,6 +23,7 @@ Atoms belonging to the same molecule interact through a harmonic bond potential 
 * `ffnonbond.json` -- LJ parameters for N2, O2, Ar
 * `ffbond.json` -- harmonic bond parameters for diatomic molecules
 * `sim.json` -- simulation conditions
+* `pack.inp` -- make box with air (`packmol < pack.inp`)
 * `pbc.vmd` -- show box and wrap coordinates (`vmd -e pbc.vmd file.pdb`)
 
 
