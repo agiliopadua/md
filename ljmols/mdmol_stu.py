@@ -242,11 +242,10 @@ def forces_pair(r, sig, eps, box, rcut, excl):
     rcut2 = rcut*rcut
     for i in range(natom - 1):
         for j in range(i + 1, natom):
-            rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
 #           ...
             fij = [0.0, 0.0, 0.0]       # TODO replace by expression
-            f[i] -= fij
-            f[j] += fij
+            f[i] += fij
+            f[j] -= fij
             vir += np.sum(rij * fij)
     return f, vir
 
@@ -265,7 +264,7 @@ def epot_bond(r, bonds, box):
 
     epot = 0.0
     for bd in bonds:
-        rij = r[bd['j']] - r[bd['i']]   # [rij_x, rij_y, rij_z]
+        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
 #        ...                            
         epot += 0.0                     # TODO replace by expression
     return epot
@@ -286,11 +285,11 @@ def forces_bond(r, bonds, box):
     natom = len(r)
     f = np.zeros((natom, 3))
     for bd in bonds:
-        rij = r[bd['j']] - r[bd['i']]   # [rij_x, rij_y, rij_z]
+        rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
 #       ...
         fij = [0.0, 0.0, 0.0]           # TODO replace by expression
-        f[bd['i']] -= fij
-        f[bd['j']] += fij
+        f[bd['i']] += fij
+        f[bd['j']] -= fij
     return f
 
 
@@ -309,7 +308,7 @@ def pressure(natom, vir, temp, box):
 
     vol = np.prod(box) * 1e-30  # [m3]
     p = (natom * cst.k * temp / vol \
-        + vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+        - vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
     return p
 
 # -------------------------------------

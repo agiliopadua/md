@@ -163,7 +163,7 @@ def epotential(r, sig, eps, box, rcut):
     epot = 0.0
     for i in range(natom - 1):
         for j in range(i + 1, natom):
-            rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
+            rij = r[i] - r[j]           # [rij_x, rij_y, rij_z]
 #           ...
             epot += 0.0                 # TODO replace by expression
     return epot
@@ -193,9 +193,9 @@ def forces(r, sig, eps, box, rcut):
             rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
 #           ...
             fij = [0.0, 0.0, 0.0]       # TODO replace by expression
-            f[i] -= fij
-            f[j] += fij
-        vir += np.sum(rij * fij)
+            f[i] += fij
+            f[j] -= fij
+            vir += np.sum(rij * fij)
     return f, vir
 
 
@@ -214,7 +214,7 @@ def pressure(natom, vir, temp, box):
 
     vol = np.prod(box) * 1e-30  # [m3]
     p = (natom * cst.k * temp / vol \
-        + vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
+        - vir * 1e3 / (3 * vol * cst.Avogadro)) * 1e-5 # [bar]
     return p
 
 
