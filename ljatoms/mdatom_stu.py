@@ -254,7 +254,7 @@ def main():
     f = forces(r, sig, eps, box, rcut)
     press = pressure(r, f, temp, box)
     print(f'{0:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
-
+    sys.stdout.flush()
     writepdb(args.traj, step, box, atnames, r, 'w')
 
     tstart = time.perf_counter_ns()
@@ -268,6 +268,7 @@ def main():
             etot = ekin + epot
             press = pressure(r, f, temp, box)
             print(f'{step:6d} {etot:13.6f} {ekin:13.6f} {epot:13.6f} {temp:8.1f} {press:8.1f}')
+            sys.stdout.flush()
             writepdb(args.traj, step, box, atnames, r, 'a')
 
     tend = time.perf_counter_ns()
