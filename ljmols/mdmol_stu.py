@@ -357,7 +357,7 @@ def main():
     f = fbond + fpair
     press = pressure(r, f, temp, box)
     print(f'{0:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
-
+    sys.stdout.flush()
     writepdb(args.traj, step, box, atnames, r, bonds, 'w')
 
     tstart = time.perf_counter_ns()
@@ -373,6 +373,7 @@ def main():
             etot = ekin + epot
             press = pressure(r, f, temp, box)          
             print(f'{step:6d} {etot:13.5f} {ekin:13.5f} {epot:13.5f} {ebond:13.5f} {epair:13.5f} {temp:8.1f} {press:8.1f}')
+            sys.stdout.flush()
             writepdb(args.traj, step, box, atnames, r, bonds, 'a')
 
     tend = time.perf_counter_ns()
