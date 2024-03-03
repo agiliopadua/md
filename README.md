@@ -8,7 +8,7 @@ The case studies below make use of Python libraries and simulation codes install
 
 ### Python environment
 
-In order to activate the **conda** installation in `/projects/DepartementChimie/miniconda3`, append the contents of the `conda.rc` file to your `.bashrc`.
+In order to activate the **conda** installation in `/projects/DepartementChimie/miniconda3`, append the contents of the `conda.rc` file to your `.bashrc`, then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
 
 ### Codes
 
@@ -18,7 +18,7 @@ In order to activate the **conda** installation in `/projects/DepartementChimie/
 * Avogadro: /usr/bin/avogadro (in the PATH)
 * Open Babel: /usr/bin/obabel
 * Gromacs: /usr/bin/gmx (in the PATH)
-* OpenMM, mdtraj: `conda activate omm`
+* OpenMM, mdtraj: in the `omm` conda environment (`conda activate omm`)
 
 
 ## Study cases
