@@ -7,6 +7,6 @@
   <Bond class1="Ow" class2="Hw" potential="cons" length="1.000" k="4331.53" />
  </Bonds>
  <Angles>
-  <Angle class1="Hw" class2="Ow" class3="Hw" potential="harm" angle="109.47" k="317.57" />
+  <Angle class1="Hw" class2="Ow" class3="Hw" potential="cons" angle="109.47" k="317.57" />
  </Angles>
 </ForceField>
