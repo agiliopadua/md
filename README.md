@@ -8,17 +8,26 @@ The case studies below make use of Python libraries and simulation codes install
 
 ### Python environment
 
-In order to activate the **conda** installation in `/projects/DepartementChimie/miniconda3`, append the contents of the `conda.rc` file to your `.bashrc`, then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
+A **conda** installation with the simulation codes and tools is installed in `/projects/DepartementChimie/miniconda3`. To activate it append the contents of the `conda.rc` file (in this repository) to your `.bashrc` and then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
 
-### Codes
+### Paths to codes on the CBP
 
-* LAMMPS: /projects/DepartementChimie/lammps/bin/lmp
+* **LAMMPS**: /projects/DepartementChimie/lammps/bin/lmp
+
+    Include in your `.bashrc` (and then restart a terminal shell):
+
+        DEPT=/projects/DepartementChimie
+        export LD_LIBRARY_PATH=$DEPT/plumed/lib
+        export PATH=$DEPT/lammps/bin:$PATH
+
 * packmol: /usr/bin/packmol (in the PATH)
 * VMD: /usr/local/bin/vmd (in the PATH)
 * Avogadro: /usr/bin/avogadro (in the PATH)
-* Open Babel: /usr/bin/obabel
+* Open Babel: /usr/bin/obabel (in the PATH)
 * Gromacs: /usr/bin/gmx (in the PATH)
-* OpenMM, mdtraj: in the `omm` conda environment (`conda activate omm`)
+* **OpenMM, mdtraj**: in the `omm` conda environment
+
+        conda activate omm
 
 
 ## Study cases
