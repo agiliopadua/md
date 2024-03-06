@@ -118,7 +118,7 @@ Edit the `in-run.lmp` file to:
 * run 100 000 steps
 
 
-### Compute the following quantities (and compare to experimental values):
+### 4 - Compute quantities (and compare with experimental values):
 - density
 - enthalpy of vaporization (the intermolecular potential energy plus RT)
 - radial distribution functions 
