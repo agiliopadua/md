@@ -89,6 +89,8 @@ This should take 5 minutes or so, depending on the machine; check progress:
 
 (Ctrl-C to exit the `tail` command)
 
+Follow the evolution of the different properties (density, energies).
+
 Look at the table at the end of the file with the performance: find the speed in ns/day and where LAMMPS spends more time (pair interactions, electrostatics, communication, etc.)
 
 Check that energy and density have converged by plotting the respective columns from the `log.lammps` file.
@@ -125,9 +127,11 @@ Edit the `in-run.lmp` file to:
 
 * save a snapshot to `dump.lammpstrj` every 100 steps
 
-* run 100 000 steps
+Run 100 000 steps
 
         mpirun -np 8 lmp -in in-run.lmp > run.lmp &
+
+Visualize the trajectory with VMD and look at the hydrogen-bond pattern
 
 
 ### 4 - Compute quantities (and compare with experimental values):
