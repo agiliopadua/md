@@ -27,8 +27,9 @@ compute M all reduce sum v_qrx v_qry v_qrz
 
 variable MM equal "c_M[1]*c_M[1] + c_M[2]*c_M[2] + c_M[3]*c_M[3]"
 
-fix aM all ave/time 50 2000 100000 c_M[*] v_MM file mavg.lammps
-fix iM all ave/time 1 1 50 v_t c_M[*] file dipole.lammps format %16.8e 
+fix iM all ave/time 1 1 100 v_t c_M[*] file dipole.lammps format %16.8e 
+
+fix aM all ave/time 100 1000 100000 c_M[*] v_MM file mavg.lammps
 
 variable eps0 equal 8.85419e-12
 variable kB   equal 1.38065e-23
@@ -37,9 +38,9 @@ variable e    equal 1.60122e-19
 variable epsr equal "1.0 + v_e^2 * 1.0e10 / (3 * v_eps0 * v_kB * v_TK * vol) &
    * (f_aM[4] - (f_aM[1]*f_aM[1] + f_aM[2]*f_aM[2] + f_aM[3]*f_aM[3]))"
 
-fix EPSR all print 200000 "${t} ${epsr}" file epsr.lammps screen no
+fix EPSR all print 100000 "${t} ${epsr}" file epsr.lammps screen no
 
 thermo_style custom step cpu v_t c_M[*] v_MM
-thermo 50
+thermo 100
 
 rerun dump.lammpstrj dump x y z box yes
