@@ -1,0 +1,6 @@
+<ForceField>
+ <Atoms>
+  <Atom type="Na" class="Na" mass="22.990" charge="+1.00" potential="lj" sigma="3.33" epsilon="0.01160" />
+  <Atom type="Cl" class="Cl" mass="35.453" charge="-1.00" potential="lj" sigma="4.41724" epsilon="0.492833" />
+ </Atoms>
+</ForceField>
