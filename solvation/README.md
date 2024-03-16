@@ -1,6 +1,6 @@
 # SOLVATION
 
-MD simulations to study the solvation of NaCl and glycerol in water.
+MD simulations to study the solvation of NaCl and ethelene glycol in water.
 
 ## Objective
 
@@ -79,7 +79,7 @@ dump the trajectory every 100 steps.
 
 ### 1.2 - Analysis
 
-Perform the following analysis using `MDTraj` as explained in the [analysis.ipynb](../water/) file:
+Perform the following analysis using `MDTraj` as explained in the [analysis](analysis.ipynb) file:
 
 * RDF and coordination number of Cl - O
 * RDF and coordination number of Na - O
@@ -137,8 +137,7 @@ dump the trajectory every 100 steps and run a 300000 steps trajectory.
 ### 2.2 - Analysis
 
 Perform the following analysis using `MDTraj` 
-as explained in the [analysis.ipynb](../
-water/) file:
+as explained in the [analysis](analysis.ipynb) file:
 
 * RDF and coordination number of C - Ow
 * RDF and coordination number of OHG - Ow
