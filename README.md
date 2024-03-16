@@ -35,3 +35,4 @@ A **conda** installation with the simulation codes and tools is installed in `/p
 * `ljatoms` -- simple MD code for Lennard-Jones atoms
 * `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
 * `water` -- simulation of water using LAMMPS
+* `solvation` -- simulation of solvation of NaCl and ethelene glycol in water using LAMMPS
