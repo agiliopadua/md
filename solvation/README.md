@@ -96,7 +96,7 @@ Build a system with 1 EG molecule and 500 water
 molecules at a density slightly lower than that of 
 pure water at 300 K
 
-    fftool 1 eg.xyz 500 spce.zmat -r 40
+    fftool 1 EG.zmat 500 spce.zmat -r 40
 
 Pack the system using `packmol` and generate the LAMMPS input files using `fftool` as done in the previous case. 
 
@@ -125,13 +125,33 @@ and modify it as for the [water](../water/) case.
 
 While for the **RDF** calculation the pairs of 
 interest change. To study the solvation shell of the 
-solvents we calculate the RDF between C* - Ow (`1 
-4`) and Cl - Ow (`2 4`). Hydrogen bonding between 
-chloride and water can be studied via the RDF 
-between Cl - Hw  (`2 3`).
+solvents we calculate the RDF between C - Ow (`1 
+6`) and OHG - Ow (`2 6`).  
 
-    compute RDF all rdf 120 1 4 2 4 2 3
+    compute RDF all rdf 120 1 6 2 6 
     fix RDF all ave/time 50 2000 100000 c_RDF[*] 
 mode vector file rdf.lmp
 
-dump the trajectory every 100 steps.
+dump the trajectory every 100 steps and run a 300000 steps trajectory.
+
+### 2.2 - Analysis
+
+Perform the following analysis using `MDTraj` 
+as explained in the [analysis.ipynb](../
+water/) file:
+
+* RDF and coordination number of C - Ow
+* RDF and coordination number of OHG - Ow
+* RDF of HOG - Ow 
+* RDF of Hw - OHG
+* Combined angular-radial distribution 
+function OHG - HOG - Ow
+* Combined angular-radial distribution 
+function Ow - Hw - OHG
+* Combined angular-radial distribution 
+function OHG - HOG - OHG
+* Dihedral distribution of the O - C - C - O dihedral in EG
+
+
+compare the results with LAMMPS when possible.
+
