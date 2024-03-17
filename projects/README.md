@@ -34,7 +34,7 @@ Compare the results obtained by simulating air with LAMMPS and comment on the pr
 
 ### 1.3 - Molecular NPT code
 
-Choose to implement one thermostat from the 
+Choose to implement one barostat from the 
 following:
 
 * [Berendsen Barostat](https://doi.org/10.1063/1.448118)
