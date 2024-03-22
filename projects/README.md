@@ -64,7 +64,9 @@ Study the structural and dynamic properties of the system using LAMMPS and MDTra
 
 Add in the solvent one of the following solutes:
 
-*
+* SO2
+* Paracetamol
+* Sodium acetate
 
 Study the solvation environment of the soulte by calculating the structural and dynamic properties of the system using MDTraj and compare with the literature when possible. 
 
