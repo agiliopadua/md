@@ -1,0 +1,113 @@
+# des.ff, version 2021/04/14
+# Molecular force field for ionic liquids
+# Agilio Padua, J.N. Canongia Lopes
+# contributors: K. Shimizu, A. Podgorsek, F. Hammami, L. Gontrani, M. Mishra,
+#               C. Bernardes, K.Goloviznina
+# questions to: agilio.padua@ens-lyon.fr
+#
+# units: kJ/mol, A, deg
+# bond and angle force constants are in the form k/2 (x - x0)^2
+# use 'cons' to indicate constrained bonds and angles
+# in improper dihedrals the central atom is the third in the list
+#
+# use with fftool to build input files for LAMMPS (or DLPOLY)
+ATOMS
+#     typ  m/u     q/e    pot   pars
+# sulfoxide  OPLS-AA
+CTS   CT  12.011  -0.035  lj    3.50   0.27614
+OY    OY  15.999  -0.420  lj    2.93   1.17152
+SZ    SZ  32.060   0.130  lj    3.56   1.65268
+# toluene JACS 118 (1996) 11217; JCC 25 (2004) 1322
+CAP   CA   12.011  -0.154  lj    3.55   0.29288
+CAM   CA   12.011  -0.145  lj    3.55   0.29288
+CAO   CA   12.011  -0.147  lj    3.55   0.29288
+CAT   CA   12.011  -0.081  lj    3.55   0.29288
+HAT   HA    1.008   0.148  lj    2.42   0.12552
+HT    HC    1.008   0.092  lj    2.42   0.12552
+CTT   CT   12.011  -0.197  lj    3.50   0.27614 
+# alcohols OPLS-AA JACS 118 (1996) 11225; JPC 100 (1996) 18010
+CTO   CT   12.011   0.145  lj    3.50   0.27614
+H1O   HC    1.008   0.040  lj    2.50   0.12552
+OH    OH   15.999  -0.683  lj    3.12   0.71128
+HO    HO    1.008   0.418  lj    0.00   0.00000
+# alkyl groups OPLS-AA
+CT    CT   12.011  -0.18   lj    3.50   0.27614
+CS    CT   12.011  -0.12   lj    3.50   0.27614
+CT2   CT   12.011  -0.12   lj    3.50   0.27614
+CT3   CT   12.011  -0.06   lj    3.50   0.27614
+HC    HC    1.008   0.06   lj    2.50   0.12552
+# aromatic OPLS-AA
+CA    CA   12.011  -0.115  lj    3.55   0.29288
+HA    HA    1.008   0.115  lj    2.42   0.12552 
+
+
+BONDS
+# i j    pot    re/A    kr/kJmol-1
+# sulfoxide opls-aa
+OY  SZ   harm   1.530   5857.60
+SZ  CT   harm   1.790   2845.12
+# alkanes OPLS-AA JACS118(1996)11225, JPC100(1996)18010
+HC  CT   cons   1.090   2845.0
+CT  CT   harm   1.529   2242.0
+# aromatics AMBER JACS 117(1995)5179
+CA  CA   harm   1.400   3924.6
+CA  HA   cons   1.080   3071.1
+# toluene AMBER JACS 117(1995)5179
+CA  CT   harm   1.510   2652.7
+# hydroxyl OPLS-AA JACS 118(1996)11225, JPC 100(1996)18010
+CT  OH   harm   1.410   2677.8
+HO  OH   cons   0.945   4627.5
+
+ANGLES
+# i j   k    pot    th/deg  ka/kjmol-1
+# sulfoxide
+CT  SZ  CT   harm    96.0   518.816
+OY  SZ  CT   harm   107.0   619.232
+SZ  CT  HC   harm   109.5   292.880
+# alkyl OPLS-AA JACS118(1996)11225, JPC100(1996)18010
+CT  CT  CT   harm   112.7   488.3
+CT  CT  HC   harm   110.7   313.8
+HC  CT  HC   harm   107.8   276.1
+# aromatics AMBER JACS 117(1995)5179
+CA  CA  HA   harm   120.0   292.9
+CA  CA  CA   harm   120.0   527.2
+# toluene AMBER JACS 117(1995)5179
+CA  CA  CT   harm   120.0   585.8
+CA  CT  HC   harm   109.5   418.4
+# hydroxyl JACS 118(1996)11225, JPC 100(1996)18010
+CT  CT  OH   harm   109.5   418.4
+HC  CT  OH   harm   109.5   292.9
+CT  OH  HO   harm   108.5   460.2
+
+DIHEDRALS
+# i j   k   l    pot    v1        v2        v3        v4
+# sulfoxide
+HC  CT  SZ  OY   opls   0.00000  0.00000   1.46440   0.00000
+HC  CT  SZ  CT   opls  0.00000    0.00000    1.46440    0.00000
+# hydroxyl JACS 118 (1996) 11225; AMBER98 (OCCO) 117 (1995) 5179
+HC  CT  OH  HO   opls    0.0000    0.0000    1.8828    0.0000
+CT  CT  OH  HO   opls   -1.4895   -0.7280    2.0585    0.0000
+HC  CT  CT  OH   opls    0.0000    0.0000    1.9581    0.0000
+OH  CT  CT  OH   opls    0.0000   -9.8324    1.2050    0.0000
+# alkanes OPLS-AA JACS 118 (1996) 11225; JPC 100 (1996) 18010
+HC  CT  CT  HC   opls    0.0000    0.0000    1.2552    0.0000
+CT  CT  CT  HC   opls    0.0000    0.0000    1.2552    0.0000
+CT  CT  CT  CT   opls    5.4392   -0.2092    0.8368    0.0000
+# aromatics AMBER JACS 117 (1995) 5179
+CA  CA  CA  CA   opls    0.0000   30.3340    0.0000    0.0000
+CA  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+HA  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+# toluene AMBER JACS 117 (1995) 5179
+CT  CA  CA  CA   opls    0.0000   30.3340    0.0000    0.0000
+CT  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+# CA  CA  CT  HC   opls    0.0000    0.0000    0.0000    0.0000
+
+
+IMPROPER
+CT  CT  SZ OY   opls    0.00000    0.00000    0.00000    0.00000
+# improper C aromatics AMBER JACS 117 (1995) 5179
+CA  CA  CA  HA   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  CA  CA   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  CA  CT   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  NA  CT   opls    0.0000    9.2048    0.0000    0.0000
+CA  NA  CA  HA   opls    0.0000    9.2048    0.0000    0.0000
