@@ -53,7 +53,10 @@ The aim of this project is to study the solvation properties of the chosen solve
 
 Use LAMMPS to run the MD simulations of one of the following solvents:
 
-*
+* methanol
+* ethanol
+* dmso
+* toluene
 
 Study the structural and dynamic properties of the system using LAMMPS and MDTraj and compare your findings with existing data in the literature.
 
