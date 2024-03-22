@@ -28,7 +28,6 @@ Choose to implement one thermostat from the following:
 
 * [Langevin Thermostat](https://doi.org/10.1103/PhysRevB.17.1302)
 
-* [Andersen Thermostat](https://doi.org/10.1063/1.439486)
 
 Compare the results obtained by simulating air with LAMMPS and comment on the pros and the cons of the chosen thermostat.
 
@@ -41,7 +40,6 @@ following:
 
 * [Langevin Piston Barostat](https://doi.org/10.1063/1.470648)
 
-* [Andersen Barostat](https://doi.org/10.1063/1.439486)
 
 Compare the results obtained by simulating air with LAMMPS and comment on the pros and the cons of the chosen barostat.
 
