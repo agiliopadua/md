@@ -16,6 +16,11 @@ HC   HC   1.008    0.06    lj  2.50  0.12552
 # SO2
 SON   SON  32.065   0.590  lj    3.39   0.6135
 OSN   OSN  15.999  -0.295  lj    3.05   0.6568
+# sodium acetate
+C2    C_3  12.011   0.700   lj    3.75   0.43932
+C1    CT   12.011  -0.280   lj    3.50   0.27614
+O2     O2   15.999  -0.800   lj    2.96   0.87864
+Na    Na   22.990  +1.00   lj    3.33   0.01160
 
 
 BONDS
@@ -39,6 +44,9 @@ C   N    harm   1.335   4100.32
 CA  OH   harm   1.364   3765.60
 #SO2
 SON OSN  harm   1.430    533.1
+#sodium acetate
+C_3 CT   harm	1.522	2652.6
+C_3 O2   harm	1.250	5489.4
 
 ANGLES
 # i j   k    pot    th/deg  ka/kjmol-1
@@ -64,8 +72,13 @@ CA  OH  HO   harm   113.0   292.880
 CA  N   C    harm   121.9   418.400
 CA  N   H    harm   119.8   292.880
 C   N   H    harm   119.8   292.880
-#SO2
+# SO2
 OSN SON OSN  harm   119.3   460.2
+# sodium acetate
+CT  C_3 O2   harm   117.0	585.76 
+HC  CT  C_3  harm   109.5	292.88
+O2  C_3 O2   harm   126.0	669.44
+
 
 
 DIHEDRALS
@@ -94,6 +107,8 @@ O   C   CT  HC   opls    0.00000    0.00000    0.00000    0.00000
 N   C   CT  HC   opls    0.00000    0.00000    0.00000    0.00000
 CT  C   N   CA   opls    9.62320   25.47638    0.00000    0.00000
 CT  C   N   H    opls    0.00000   20.50160    0.00000    0.00000
+# sodium acetate
+HC  CT  C_3 O2   opls	0.0000   0.0000     0.0000    0.0000	
 
 IMPROPER
 # improper C aromatics AMBER JACS 117 (1995) 5179
