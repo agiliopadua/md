@@ -1,0 +1,74 @@
+# nanocarbon.ff (kJ/mol, A, deg) version 2013/11/15
+# A. Padua, J. França
+
+ATOMS
+#   type  m/uma   q/e    pot   pars
+# aromatics OPLS-AA JACS 118(1996)11225
+CA   CA  12.011  -0.115  lj    3.55   0.29288
+HA   HA   1.008   0.115  lj    2.42   0.12552
+# buckminsterfullerenes Girifalco
+CB   CA  12.011   0.000  lj    3.47   0.27640
+# graphene Girifalco and OPLS-AA
+CGZ  CA  12.011  -0.115  lj    3.47   0.27640
+CGA  CA  12.011  -0.115  lj    3.47   0.27640
+CGM  CA  12.011   0.000  lj    3.47   0.27640
+CG   CA  12.011   0.000  lj    3.47   0.27640
+HGZ  HA   1.008   0.115  lj    2.42   0.12552
+HGA  HA   1.008   0.115  lj    2.42   0.12552
+# nanotubes
+CNT  CA  12.011   0.000  lj    3.47   0.27640
+HNT  HA   1.008   0.115  lj    2.42   0.12552
+# armchair nanotubes
+CNA  CA  12.011  -0.115  lj    3.47   0.27640
+# zig-zag nanotubes
+CNZ  CA  12.011  -0.115  lj    3.47   0.27640
+CNM  CA  12.011   0.000  lj    3.47   0.27640
+# fluorinated OPLS-AA JPCA105:4118(2001)
+F    F   18.998  -0.12   lj    2.95   0.22175
+CF   CF  12.011   0.12   lj    3.50   0.27614
+
+BONDS
+# i j    pot    re/A    ka/kJmol-1
+# aromatics AMBER JACS 117(1995)5179
+CA  CA   harm   1.430   3924.6
+CA  HA   cons   1.080   3071.1
+# fluorinated
+F   CF   harm   1.38    3071.1
+CF  CF   harm   1.60    2242.6
+CF  CA   harm   1.52    2500.0
+
+ANGLES
+# i  j  k    pot    th/deg   ka/kjmol-1
+# aromatics AMBER JACS 117(1995)5179
+CA  CA  CA   harm   120.00   527.18
+CA  CA  HA   harm   120.00   292.88
+# fluorinated
+F   CF  CF   harm   109.5    418.4
+CF  CF  CF   harm   112.7    488.3
+F   CF  CA   harm   109.5    418.4
+CF  CF  CA   harm   112.7    488.3
+CF  CA  CF   harm   112.7    488.3
+CF  CA  CA   harm   112.7    488.3
+
+DIHEDRALS
+# i j   k   l    pot    v1       v2       v3       v4
+# aromatics AMBER JACS 117(1995)5179
+CA  CA  CA  CA   opls   0.0000   30.334   0.0000   0.0000
+CA  CA  CA  HA   opls   0.0000   30.334   0.0000   0.0000
+HA  CA  CA  HA   opls   0.0000   30.334   0.0000   0.0000
+# fluorinated
+F   CF  CF  F    opls -10.4600   0.0000   1.0460   0.0000
+F   CF  CF  CF   opls   1.2552   0.0000   1.6736   0.0000
+CF  CF  CF  CF   opls  27.7064   3.9664  -5.8074  -8.8617
+F   CF  CF  CA   opls   1.2552   0.0000   1.6736   0.0000
+F   CF  CA  CF   opls   1.2552   0.0000   1.6736   0.0000
+F   CF  CA  CA   opls   1.2552   0.0000   1.6736   0.0000
+CF  CF  CF  CA   opls  27.7064   3.9664  -5.8074  -8.8617
+CF  CF  CA  CF   opls  27.7064   3.9664  -5.8074  -8.8617
+CF  CF  CA  CA   opls  27.7064   3.9664  -5.8074  -8.8617
+CF  CA  CA  CF   opls  27.7064   3.9664  -5.8074  -8.8617
+
+IMPROPER
+# i j   k   l    pot    v1       v2       v3       v4
+# aromatics AMBER JACS 117(1995)5179
+CA  CA  CA  HA   opls   0.0000   9.2048   0.0000   0.0000
