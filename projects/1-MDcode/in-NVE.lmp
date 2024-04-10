@@ -1,0 +1,44 @@
+# created by fftool
+
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+
+special_bonds lj 0.0 0.0 0.5
+
+pair_style lj/cut 12.0
+
+read_data data.lmp
+
+pair_coeff    1    1      0.102318     3.297000  # O O
+pair_coeff    2    2      0.232075     3.395200  # Ar Ar
+pair_coeff    3    3      0.079708     3.614000  # N N
+
+neighbor 2.0 bin
+
+timestep 1.0
+
+variable TK equal 200.0
+variable PBAR equal 2.0
+
+#velocity all create ${TK} 12345
+
+fix INTEG all nve
+
+variable etotkj equal etotal*4.184
+variable kekj equal ke*4.184
+variable pekj equal pe*4.184
+variable ebondkj equal ebond*4.184
+variable evdwlkj equal evdwl*4.184
+
+thermo 10
+thermo_style custom step etotal v_etotkj v_kekj v_pekj v_ebondkj v_evdwlkj temp press
+
+dump TRAJ all custom 10 dump.lammpstrj id mol type element q xu yu zu
+dump_modify TRAJ element O Ar N
+
+run 500
+
+#write_data data.eq.lmp

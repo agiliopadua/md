@@ -1,0 +1,16 @@
+# MoS2 (kJ/mol, A, deg), version 2015/05/12
+# Agilio, Ananth, Vishnu
+
+ATOMS
+#   type  m/uma    q/e    pot   pars
+Mo  Mo   95.96     0.50   lj    4.43    0.485
+S   S    32.065   -0.25   lj    3.34    2.085
+
+BONDS
+# i j    pot    re/A    ka/kJmol-1
+Mo  S    harm   2.41    430.3
+
+ANGLES
+# i  j   k    pot    th/deg   ka/kjmol-1
+S   Mo   S    harm   83.8   1187.7
+Mo  S    Mo   harm   83.8   2050.0
