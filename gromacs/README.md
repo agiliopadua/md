@@ -156,13 +156,13 @@ To center the protein in the box during the trajectory and to unwrap coordinates
 
     gmx trjconv -s md.tpr -f md.xtc -o md_noPBC.xtc -pbc mol -center
 
-Select `1` ("Protein") as the group to be centered and `0` ("System") for output.
+Select `1` (Protein) as the group to be centered and `0` (System) for output.
 
 To calculate the RMSD of the protein:
 
     gmx rms -s md.tpr -f md_noPBC.xtc -o rmsd.xvg -tu ps
 
-Choose `4` ("Backbone") for both the least-squares fit and the group for RMSD calculation.
+Choose `4` (Backbone) for both the least-squares fit and the group for RMSD calculation.
 
 Calculate the radius of gyration of the protein along the trajectory:
 
