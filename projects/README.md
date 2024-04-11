@@ -94,18 +94,11 @@ Make sure that your drop is close to the experimental density of water.
 
 Perform an energy minimization followed by a 10000 NPT in xy and NVT in z step equilibration at 10K.
 
-'''
-fix TPSTAT all npt temp ${TK} ${TK} 100 x ${PBAR} ${PBAR} 500 y ${PBAR} ${PBAR} 500
-'''
+  fix TPSTAT all npt temp ${TK} ${TK} 100 x ${PBAR} ${PBAR} 500 y ${PBAR} ${PBAR} 500
+
 
 
 **Production**
-
-To stop the drop from sliding on the surface use fix momentum
-
-'''
-fix ICECUBE all momentum 1000 linear 1 1 0
-'''
 
 and run a 100000 steps production trajectory at 300K.
 
