@@ -15,7 +15,7 @@ def readpdb(pdbfile):
     """Read PDB file
 
     Args:
-        pdbfile (string): PDB file
+        pdbfile (string): PDB file name
 
     Returns:
         box (ndarray): Lx, Ly, Lz box lengths
@@ -77,7 +77,7 @@ def writepdb(pdbfile, step, box, atnames, r, mode='a'):
 #   temperature [K]
 #   energy [kJ/mol]
 #   force [(kJ/mol)/A]
-
+#   pressure [bar]
 
 def ljparams(atnames, forcefield):
     """Set non-bonded LJ parameters
@@ -119,7 +119,7 @@ def initvel(m, temp):
     natom = len(m)
     v = np.zeros((natom, 3))
     for i in range(natom):
-        fact = 0.0                      # TODO replace by expression
+        fact = (cst.R * temp / (m[i, 0] * 1e-3))**0.5 * 1e-5 # m [g/mol], v [A/fs]
         v[i, 0] = fact * random.gauss()
         v[i, 1] = fact * random.gauss()
         v[i, 2] = fact * random.gauss()
@@ -163,9 +163,17 @@ def epotential(r, sig, eps, box, rcut):
     epot = 0.0
     for i in range(natom - 1):
         for j in range(i + 1, natom):
-            rij = r[i] - r[j]           # [rij_x, rij_y, rij_z]
-#           ...
-            epot += 0.0                 # TODO replace by expression
+            rij = r[i] - r[j]
+            rij -= np.rint(rij/box) * box
+            rsq = np.sum(rij*rij)
+            if rsq > rcut2:
+                continue
+            sigij = (sig[i] + sig[j])/2
+            epsij = (eps[i] * eps[j])**0.5
+            sr2 = sigij * sigij / rsq
+            sr6 = sr2 * sr2 * sr2
+            sr12 = sr6 * sr6
+            epot += 4 * epsij * (sr12 - sr6)
     return epot
 
 
