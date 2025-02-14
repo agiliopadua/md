@@ -4,7 +4,7 @@ Course on molecular dynamics, 1st yr masters in Physical Sciences - Sciences de 
 
 ## Working environment and codes
 
-The case studies below make use of Python libraries and simulation codes installed in the machines of the CBP.
+The case studies below make use of Python libraries and simulation codes installed in the machines of the Centre Blaise Pascal, CBP.
 
 ### Python environment
 

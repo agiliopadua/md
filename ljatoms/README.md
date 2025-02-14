@@ -48,10 +48,10 @@ Some important points when completing the code:
 ## Suggested runs
 
 * Create a PDB file with 2 Ar atoms at a chosen distance in a box of 30 Å using **Avogadro** to test energy and force calculations. Avogadro is a handy tool to create an initial PDB file with some atoms (add the box with \<Crystallography>\<Add Unit Cell>).
-* Build a system with more atoms (10 -- 12) using Avogadro and run a short trajectory (20 000 steps of 5 fs, saving every 100):
+* Build a system with more atoms (10 -- 12) using Avogadro and run a short trajectory (20 000 steps of 5 fs, saving every 100 steps):
     * Visualize the trajectory using VMD.
     * Test with different initial velocities (temperatures of 0, 100 and 200 K for example).
 * Build a system with 100 atoms using **packmol** and run a trajectory of 20 000 steps starting with initial velocities of zero (T = 0 K):
     * Redirect the output to a file (`> md.out &` at the end of the command line) in order to plot properties later.
     * Check the conservation of energy.
-    * Compare the pVT properties from simulation with those of argon in the same conditions of temperature and density (or pressure) using [CoolProp](http://ibell.pythonanywhere.com), which implemenbts very accurate equations of state for fluids.
+    * Compare the pVT properties from simulation with those of argon in the same conditions of temperature and density (or pressure) using [CoolProp](http://ibell.pythonanywhere.com), which implements very accurate equations of state for fluids.
