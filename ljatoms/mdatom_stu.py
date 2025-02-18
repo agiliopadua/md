@@ -200,7 +200,7 @@ def forces(r, sig, eps, box, rcut):
         for j in range(i + 1, natom):
             rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
 #           ...
-            fij = [0.0, 0.0, 0.0]       # TODO replace by expression
+            fij = np.array([0.0, 0.0, 0.0])     # TODO replace by expression
             f[i] += fij
             f[j] -= fij
             vir += np.sum(rij * fij)
