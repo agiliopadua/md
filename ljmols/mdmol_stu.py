@@ -170,7 +170,7 @@ def initvel(m, temp):
     natom = len(m)
     v = np.zeros((natom, 3))
     for i in range(natom):
-        fact = 0.0                      # TODO replace by expression
+        fact = (cst.R * temp / (m[i][0] * 1e-3))**0.5 * 1e-5 # m [kg/mol], v [A/fs]
         v[i, 0] = fact * random.gauss()
         v[i, 1] = fact * random.gauss()
         v[i, 2] = fact * random.gauss()
@@ -215,8 +215,19 @@ def epot_pair(r, sig, eps, excl, box, rcut):
     epot = 0.0
     for i in range(natom - 1):
         for j in range(i + 1, natom):
-#           ...
-            epot += 0.0                 # TODO replace by expression
+            if j in excl[i]:
+                continue
+            rij = r[i] - r[j]
+            rij -= np.rint(rij/box) * box
+            rsq = np.sum(rij*rij)
+            if rsq > rcut2:
+                continue
+            sigij = (sig[i] + sig[j])/2
+            epsij = (eps[i] * eps[j])**0.5
+            sr2 = sigij * sigij / rsq
+            sr6 = sr2 * sr2 * sr2
+            sr12 = sr6 * sr6
+            epot += 4 * epsij * (sr12 - sr6)
     return epot
 
 
@@ -243,7 +254,7 @@ def forces_pair(r, sig, eps, box, rcut, excl):
     for i in range(natom - 1):
         for j in range(i + 1, natom):
 #           ...
-            fij = [0.0, 0.0, 0.0]       # TODO replace by expression
+            fij = np.array([0.0, 0.0, 0.0])     # TODO replace by expression
             f[i] += fij
             f[j] -= fij
             vir += np.sum(rij * fij)
@@ -265,8 +276,9 @@ def epot_bond(r, bonds, box):
     epot = 0.0
     for bd in bonds:
         rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
-#        ...                            
-        epot += 0.0                     # TODO replace by expression
+        rij -= np.rint(rij/box) * box
+        rbd = np.sqrt(np.sum(rij*rij))
+        epot += 0.5 * bd['kr'] * (rbd - bd['r0'])**2
     return epot
 
 
@@ -287,7 +299,7 @@ def forces_bond(r, bonds, box):
     for bd in bonds:
         rij = r[bd['i']] - r[bd['j']]   # [rij_x, rij_y, rij_z]
 #       ...
-        fij = [0.0, 0.0, 0.0]           # TODO replace by expression
+        fij = np.array([0.0, 0.0, 0.0])     # TODO replace by expression
         f[bd['i']] += fij
         f[bd['j']] -= fij
     return f
