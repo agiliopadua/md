@@ -198,7 +198,7 @@ def forces(r, sig, eps, box, rcut):
     rcut2 = rcut*rcut
     for i in range(natom - 1):
         for j in range(i + 1, natom):
-            rij = r[j] - r[i]           # [rij_x, rij_y, rij_z]
+            rij = r[i] - r[j]           # [rij_x, rij_y, rij_z]
 #           ...
             fij = np.array([0.0, 0.0, 0.0])     # TODO replace by expression
             f[i] += fij
