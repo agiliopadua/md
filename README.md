@@ -8,7 +8,7 @@ The case studies below make use of Python libraries and simulation codes install
 
 ### Python environment
 
-A **conda** installation with the simulation codes and tools is installed in `/projects/DepartementChimie/miniconda3`. To activate it append the contents of the `conda.rc` file (in this repository) to your `.bashrc` and then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
+A **conda** installation with the simulation codes and tools is installed in `/projects/DepartementChimie/miniconda3`. To activate it append the contents of the `conda.rc` file (in the `utils` folder) to your `.bashrc` and then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
 
 ### Paths to codes on the CBP
 
@@ -36,3 +36,8 @@ A **conda** installation with the simulation codes and tools is installed in `/p
 * `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
 * `water` -- simulation of water using LAMMPS
 * `solvation` -- simulation of solvation of NaCl and ethelene glycol in water using LAMMPS
+
+
+## Utilities
+
+Utilities to plot LAMMPS output from `log.lammps, to display the simulation box using VMD, etc. 
