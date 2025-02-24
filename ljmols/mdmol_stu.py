@@ -150,7 +150,10 @@ def topology(atnames, bonds, ffbond):
     for i in range(len(atnames)):
         excl.append([])
         for bd in bonds:
-#           ...                         # TODO build exclusion lists!
+            if i == bd['i']:
+                excl[i].append(bd['j'])
+            elif i == bd['j']:
+                excl[i].append(bd['i'])
 
     return bonds, excl
 
