@@ -11,6 +11,8 @@ pair_style zero 12.0 nocoeff
 
 read_data data.eq.lmp
 
+pair_coeff * *
+
 neighbor 2.0 bin
 
 timestep 1.0
