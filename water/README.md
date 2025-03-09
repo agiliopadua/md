@@ -57,7 +57,7 @@ this creates two files, one is a script with LAMMPS commands and the other a dat
 familiarize yourself with their formats and content.
 
 
-### 2 - Run an equilibration of 100 ps
+### 2 - Run an equilibration of 200 ps
 
 We want to start from the initial configuration at 40 mol L<sup>-1</sup> and let it reach a state representative of thermodynamic equilibrium. We will then use the last configuration from the equilibration to start a production trajectory from which averages have a meaning.
 
@@ -65,7 +65,8 @@ Make a copy of `in.lmp` for editing
 
     cp in.lmp in-eq.lmp
 
-edit `in-eq.lmp` to run 100 000 steps in the $NpT$ ensemble.
+edit `in-eq.lmp` to run 100 000 steps in the $NpT$ ensemble and 100 000 steps in the $NVT$ ensemble.
+This is done by uncommenting the last portion of the code to calculate the average volume of the simulation box and to unfix the $NpT$ thermostat and substitute it with the $NVT$ one.
 
 Check how many processor cores your machine has
 
@@ -107,6 +108,7 @@ Prepare a new input script for LAMMPS
         cp in-eq.lmp in-run.lmp
 
 Edit the `in-run.lmp` file to:
+* run an $NVT$ simulation
 * read the configuration from `data.eq.lmp` (the last one saved from the equilibration)
 * **do not create new velocities!** (comment out the command)
 * calculate mean-squared displacements (and add the compute to `thermo_style` for printing)
@@ -144,7 +146,7 @@ Visualize the trajectory with VMD and look at the hydrogen-bond pattern
 
         lmp -in in-rerun.lmp
 
-    The instantaneous dipole moment of the system is stored in `dipole.lammps` and the value calculated for $\epsilon$ is in `epsr.lammps`. Plot the components of the dipole moment to see how they behave (the volume fluctuates because the run was in $NpT$, but this is not a main source of fluctuations).
+    The instantaneous dipole moment of the system is stored in `dipole.lammps` and the value calculated for $\epsilon$ is in `epsr.lammps`. Plot the components of the dipole moment to see how they behave.
 
 
 ## Contents
