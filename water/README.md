@@ -146,7 +146,7 @@ Visualize the trajectory with VMD and look at the hydrogen-bond pattern
 
         lmp -in in-rerun.lmp
 
-    The instantaneous dipole moment of the system is stored in `dipole.lammps` and the value calculated for $\epsilon$ is in `epsr.lammps`. Plot the components of the dipole moment to see how they behave.
+    The instantaneous dipole moment of the system is stored in `dipole.lammps` and the value calculated for $\epsilon$ is in `epsr.lammps`. Plot the components of the dipole moment to see how they behave, what could be the fluctuations due to? How could we improve the measurement?
 
 
 ## Contents
