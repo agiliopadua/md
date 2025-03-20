@@ -1,0 +1,118 @@
+# created by fftool
+
+units real
+boundary p p p
+
+atom_style full
+bond_style harmonic
+angle_style harmonic
+
+special_bonds lj/coul 0.0 0.0 0.5
+
+# remove hybrid if not necessary
+pair_style hybrid lj/cut/coul/long 12.0 12.0
+pair_modify mix geometric tail yes
+kspace_style pppm 1.0e-5
+
+read_data data.run.lmp
+# read_restart restart1.lmp
+
+# remove pair style if not using hybrid
+pair_coeff    1    1 lj/cut/coul/long     0.002772     3.330000  # Na Na
+pair_coeff    2    2 lj/cut/coul/long     0.117790     4.417240  # Cl Cl
+pair_coeff    3    3 lj/cut/coul/long     0.000000     0.000000  # Hw Hw
+pair_coeff    4    4 lj/cut/coul/long     0.155425     3.165500  # Ow Ow
+
+
+fix SHAKE all shake 0.0001 20 0 b 1 a 1
+
+# Groups for molecules
+group Cl type 2          
+group Na type 1          
+group H2O type 3 4       
+
+
+# distance to measure (collective variable of the PMF)
+compute NaCOM Na com
+compute ClCOM Cl com
+variable dx equal c_ClCOM[1]-c_NaCOM[1]
+variable dy equal c_ClCOM[2]-c_NaCOM[2]
+variable dz equal c_ClCOM[3]-c_NaCOM[3]
+variable dist equal sqrt(v_dx*v_dx+v_dy*v_dy+v_dz*v_dz)
+
+
+variable TK equal 300.0
+variable PBAR equal 1.0
+
+neighbor 2.0 bin
+
+timestep 1.0
+
+#velocity all create ${TK} 12345
+
+fix TSTAT all nvt temp ${TK} ${TK} 100
+
+
+
+thermo_style custom step time temp etotal pe ebond eangle edihed evdwl ecoul elong press v_dist
+thermo 500
+
+variable t equal time
+
+# range of bias distances and respective force constants
+variable r0 index &
+ 6.75 6.50 6.25  6.0  &
+ 5.75 5.50 5.25  5.0  &
+ 4.75 4.50 4.25  4.0  &
+ 3.75 3.50 3.25  3.0  &
+ 2.75 2.50 2.25  2.0  
+
+# Elastic constant of spring
+# variable k  index 80.0 80.0 80.0 80.0 80.0 80.0 80.0 80.0 80.0 80.0 &
+#                   80.0 80.0 80.0 80.0 80.0 80.0 
+                    
+variable k equal 100
+
+# Printing in gnuplot input file and wham.meta file                    
+print "# metadata for PMF calculation with wham" screen no file wham.meta
+print "# gnuplot histograms" screen no file hist.gp
+print "plot \ " screen no append hist.gp
+
+# loop for umbrella sampling
+label umbrloop
+  
+
+  reset_timestep 0
+  
+  dump TRAJ all custom 20000 dump.${r0}.lammpstrj id mol type element x y z ix iy iz
+  dump_modify TRAJ element Na Cl H O
+
+  variable dr equal ${r0}
+  
+  # small equilibration at new r0
+  print "Coupling at ${r0} with force constant ${k}"
+  fix UMBRELLA Na spring couple Cl ${k} 0.0 0.0 0.0 ${r0}
+  run 5000
+
+  #Sampling and calculating the histogram
+  print "Sampling at ${r0} with force constant ${k}"
+  fix TSERIES all print 20 "${t} ${dist}" screen no file tseries_${r0}.out
+  fix HIST all ave/histo 20 5000 105000 2.0 7.0 240 v_dist file hist_${r0}.out
+  run 100000
+
+  # print to wham.meta file and to gnuplot file
+  print "tseries_${r0}.out ${r0} ${k}" screen no append wham.meta
+  print " 'hist_${r0}.out' using 2:3 every ::2 with lines,\ " screen no append hist.gp
+
+  unfix HIST
+  unfix TSERIES
+  unfix UMBRELLA
+  undump TRAJ
+
+  next r0
+  # next k
+jump in-pmf.lmp umbrloop
+
+print "  " screen no append hist.gp
+print "pause -1" screen no append hist.gp
+
