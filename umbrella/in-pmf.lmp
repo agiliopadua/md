@@ -106,7 +106,7 @@ label umbrloop
 
   # print to wham.meta file and to gnuplot file
   print "tseries_${r0}.out ${r0} ${k}" screen no append wham.meta
-  print " 'hist_${r0}.out' using 2:3 every ::2 with lines,\ " screen no append hist.gp
+  print " 'hist_'${r0}'.out' using 2:3 every ::2 with lines,\ " screen no append hist.gp
 
   #unfix fix histogram, fix TSERIES and the coupling
   unfix ....
