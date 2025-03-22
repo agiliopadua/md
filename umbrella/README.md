@@ -1,9 +1,6 @@
-# WATER
+# PMF
 
 MD simulation to calculate the PMF of Na Cl in water using umbrella sampling
-
-## PMF
-
 
 
 ## Objective
@@ -36,13 +33,13 @@ gnuplot for visualization
 
 ## Do the simulations
 
-Use the final configuration obtained in [solvation](\solvation) to run the umbrella simulation.
+Use the final configuration obtained in [solvation](../solvation) to run the umbrella simulation.
 
 Modify the `in-pmf.lmp` reading [LAMMPS documentation](https://docs.lammps.org/Manual.html) to run the umbrella simulation.
 
 plot the histograms using gnuplot:
     
-    gnuplot> load hist.gp
+    gnuplot> load "hist.gp"
 
 What do you notice? How would it change applying a weaker force constant, or a stronger one? 
 You can try to change the force constant and/or use different force constants for every window by iterating over the k variable.
