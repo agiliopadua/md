@@ -1,9 +1,6 @@
-# WATER
+# PMF
 
 MD simulation to calculate the PMF of Na Cl in water using umbrella sampling
-
-## PMF
-
 
 
 ## Objective
