@@ -33,7 +33,7 @@ gnuplot for visualization
 
 ## Do the simulations
 
-Use the final configuration obtained in [solvation](..\solvation) to run the umbrella simulation.
+Use the final configuration obtained in [solvation](../solvation) to run the umbrella simulation.
 
 Modify the `in-pmf.lmp` reading [LAMMPS documentation](https://docs.lammps.org/Manual.html) to run the umbrella simulation.
 
