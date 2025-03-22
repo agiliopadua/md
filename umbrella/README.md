@@ -39,7 +39,7 @@ Modify the `in-pmf.lmp` reading [LAMMPS documentation](https://docs.lammps.org/M
 
 plot the histograms using gnuplot:
     
-    gnuplot> load hist.gp
+    gnuplot> load "hist.gp"
 
 What do you notice? How would it change applying a weaker force constant, or a stronger one? 
 You can try to change the force constant and/or use different force constants for every window by iterating over the k variable.
