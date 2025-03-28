@@ -5,7 +5,9 @@ For the final examination you have to complete **one project** between:
 
 * 2 - Study of solvation properties 
 
-* 3 - Study of solid-liquid interface 
+* 3 - Study of solid-liquid interface
+
+* 4 - PMF of complexation of API in a gamma-cyclodextrin
  
 
 ## 1 - NVT-NPT MD code
@@ -96,8 +98,6 @@ Perform an energy minimization followed by a 10000 NPT in xy and NVT in z step e
 
     fix TPSTAT all npt temp ${TK} ${TK} 100 x ${PBAR} ${PBAR} 500 y ${PBAR} ${PBAR} 500
 
-
-
 **Production**
 
 and run a 100000 steps production trajectory at 300K.
@@ -105,4 +105,35 @@ and run a 100000 steps production trajectory at 300K.
 ### 3.3 - Analyze the trajectory
 
 Use MDTraj to write your own analysis tool to derive the contact angle between solid and liquid and compare with the literature.
+
+
+## 4 - PMF
+
+The aim of this project is to calculate the potential of mean force of the complexation of an API into a gamma-cyclodextrine
+
+### 4.1 Build and equilibrate the system
+
+Use [packmol](https://m3g.github.io/packmol/userguide.shtml) and [fftool](https://github.com/paduagroup/fftool) to build a system containing:
+
+* 2000 water molecules
+* 1 gamma cyclodextrine
+* 1 API of your choice between: paracetamol and ibuprofen
+
+equilibrate the system using lammps
+
+### 4.2 Perform Umbrella sampling
+
+Starting from the input file that you used for the umbrella exercise, design the umbrella sampling simulation by choosing:
+
+* The number of windows
+* The elastic constant of the bias k
+* the pulling direction
+
+Sampling from 7-0A, in order to obtain full complexation.
+
+### 4.3 Perform WHAM analysis
+
+WHAM the time series to obtain the PMF curve and interpret the results. Is the complexation favorable or unfavorable? Compare with literature data.
+
+
 
