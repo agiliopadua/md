@@ -117,7 +117,7 @@ Use [packmol](https://m3g.github.io/packmol/userguide.shtml) and [fftool](https:
 
 * 2000 water molecules
 * 1 gamma cyclodextrine
-* 1 API of your choice between: paracetamol and ibuprofen
+* 1 API of your choice between paracetamol and ibuprofen
 
 equilibrate the system using lammps
 
@@ -129,11 +129,13 @@ Starting from the input file that you used for the umbrella exercise, design the
 * The elastic constant of the bias k
 * the pulling direction
 
-Sampling from 7-0A, in order to obtain full complexation.
+Sampling from 10-0A, in order to obtain full complexation.
 
-### 4.3 Perform WHAM analysis
+### 4.3 Perform WHAM analysis and study the system
 
-WHAM the time series to obtain the PMF curve and interpret the results. Is the complexation favorable or unfavorable? Compare with literature data.
+WHAM the time series to obtain the PMF curve and interpret the results. Is the complexation favorable or unfavorable? Compare with literature data. 
+
+ To which system configuration do the attractive-repulsive sections of the PMF? Analyze the structure of the system by analyzing your trajectories.  
 
 
 
