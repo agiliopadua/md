@@ -1,0 +1,124 @@
+# CDMOF.ff (kJ/mol, A, deg) version 2024/06
+# A.Padua, C. Corsini
+
+ATOMS
+#  i  m/uma    q/e    field  sigma      eps       
+# glucopyranose OPLS-AA J Comput Chem 18: 1962 (1997)
+O5GP    OS    15.99900 -0.400000    lj  2.900000  0.585760 
+C1GP    CO    12.01100  0.365000    lj  3.500000  0.276140 
+O1GP    OH    15.99900 -0.700000    lj  3.070000  0.711280 
+HO1GP   HO     1.00800  0.435000    lj  1.000000  0.000000 
+C2GP    CT    12.01100  0.205000    lj  3.500000  0.276140 
+O2GP    OH    15.99900 -0.700000    lj  3.070000  0.711280 
+HO2GP   HO     1.00800  0.435000    lj  1.000000  0.000000
+O2K     OH    15.99900 -0.205000    lj  3.070000  0.711280
+HO2K    HO     1.00800  0.060000    lj  1.000000  0.000000 
+C3GP    CT    12.01100  0.205000    lj  3.500000  0.276140 
+O3GP    OH    15.99900 -0.730000    lj  3.070000  0.711280 
+HO3GP   HO     1.00800  0.465000    lj  1.000000  0.000000
+O3K     OH    15.99900 -0.205000    lj  3.070000  0.711280
+HO3K    HO     1.00800  0.060000    lj  1.000000  0.000000 
+C4GP    CT    12.01100  0.205000    lj  3.500000  0.276140 
+O4GP    OH    15.99900 -0.730000    lj  3.070000  0.711280 
+HO4GP   HO     1.00800  0.465000    lj  1.000000  0.000000 
+C5GP    CT    12.01100  0.170000    lj  3.500000  0.276140 
+C6GP    CT    12.01100  0.145000    lj  3.500000  0.276140 
+O6GP    OH    15.99900 -0.683000    lj  3.120000  0.711280 
+HO6GP   HO     1.00800  0.418000    lj  1.000000  0.000000
+O6K     OH    15.99900 -0.205000    lj  3.070000  0.711280
+HO6K    HO     1.00800  0.060000    lj  1.000000  0.000000  
+H6GP    HC     1.00800  0.060000    lj  2.500000  0.125520 
+H5GP    HC     1.00800  0.030000    lj  2.500000  0.125520 
+H4GP    HC     1.00800  0.060000    lj  2.500000  0.125520 
+H3GP    HC     1.00800  0.060000    lj  2.500000  0.125520 
+H2GP    HC     1.00800  0.060000    lj  2.500000  0.125520 
+H1GP    HC     1.00800  0.100000    lj  2.500000  0.125520 
+# 1-4 link
+OXGP    OS     15.999  -0.530  lj     3.07   0.71128  
+# potassium polarizable 10.1021/ct900576a
+K       K      39.098   1.000  lj     3.006   0.59382
+# fluorine polarizable 10.1021/ct900576a
+F       F      18.998  -1.000  lj     4.64   0.01088
+# IL
+Cl    Cl   35.453  -1.00   lj    4.41724 0.492833
+# OH opls
+OH      OX     15.99900 -1.300    lj  3.200000  1.046000  
+HO      HX     1.00800   0.30000  lj  1.000000  0.000000
+
+BONDS
+# i  j    type    re/A    ka/kJmol-1
+# glucose OPLS-AA J Comput Chem 18: 1962 (1997)
+CO OS    harm   1.38000   2677.76
+OH CO    harm   1.38000   2677.76
+HO OH    harm   0.94500  -4627.50
+OH CT    harm   1.41000   2677.76
+CT CO    harm   1.52900   2242.62
+CT CT    harm   1.52900   2242.62
+CT OS    harm   1.41000   2677.76
+HC CT    harm   1.09000  -2845.12
+HC CO    harm   1.09000  -2845.12
+K  OH    harm   2.85800    0.000
+#K  OS    harm   2.85800   19.5811
+HX OX    harm    0.95300  -4627.50
+
+ANGLES
+# i  j    k     type      th/deg   ka/kjmol-1
+# glucose OPLS-AA J Comput Chem 18: 1962 (1997)
+CO OS CT    harm   109.500   502.080
+OS CO OH    harm   111.550   774.880
+OS CO CT    harm   109.500   418.400
+OS CO HC    harm   109.500   292.880
+OH CO CT    harm   109.500   418.400
+OH CO HC    harm   109.500   292.880
+CT CO HC    harm   110.700   313.800
+CO OH HO    harm   108.500   460.240
+CO CT OH    harm   109.500   418.400
+CO CT CT    harm   112.700   488.270
+CO CT HC    harm   110.700   313.800
+CT CT HC    harm   110.700   313.800
+OH CT HC    harm   109.500   292.880
+CT OH HO    harm   108.500   460.240
+CT CT OH    harm   109.500   418.400
+CT CT CT    harm   112.700   488.270
+OS CT HC    harm   109.500   292.880
+OS CT CT    harm   109.500   418.400
+HC CT HC    harm   107.800   276.140
+OS CO OS    harm   111.550   774.880
+
+DIHEDRALS
+# i  j    k    l    type     v1         v2          v3     
+# glucose OPLS-AA J Comput Chem 18: 1962 (1997) 
+OH CO OS CT  opls  -1.56900  -5.68190   0.01670   0.00000
+CT OS CO CT  opls   2.73630  -1.04600   2.80330   0.00000
+HC CO OS CT  opls   0.00000   0.00000   0.31770   0.00000
+HO OH CO OS  opls  -5.25930  -7.55630   0.01260   0.00000
+HO OH CO CT  opls  11.18800 -12.06240   4.29280   0.00000
+HO OH CO HC  opls   0.00000   0.00000   1.88280   0.00000
+OH CT CO OS  opls  18.07070   0.00000   0.00000   0.00000
+OH CT CO OH  opls  37.93210   0.00000   0.00000   0.00000
+OH CT CO HC  opls   0.00000   0.00000   1.95810   0.00000
+CT CT CO OS  opls  -5.58980   0.00000   0.00000   0.00000
+CT CT CO OH  opls  -5.58980   0.00000   0.00000   0.00000
+CT CT CO HC  opls   0.00000   0.00000   1.53130   0.00000
+HC CT CO OS  opls   0.00000   0.00000   1.95810   0.00000
+HC CT CO OH  opls   0.00000   0.00000   1.95810   0.00000
+HC CO CT HC  opls   0.00000   0.00000   1.33050   0.00000
+HO OH CT CO  opls  11.18800 -12.06240   4.29280   0.00000
+HO OH CT CT  opls  11.18800 -12.06240   4.29280   0.00000
+HO OH CT HC  opls   0.00000   0.00000   1.88280   0.00000
+OH CT CT CO  opls  -5.58980   0.00000   0.00000   0.00000
+OH CT CT OH  opls  37.93210   0.00000   0.00000   0.00000
+CT CT CT CO  opls   7.28020  -0.65690   1.16730   0.00000
+CT CT CT OH  opls  -5.58980   0.00000   0.00000   0.00000
+CT CT CT HC  opls   0.00000   0.00000   1.53130   0.00000
+HC CT CT CO  opls   0.00000   0.00000   1.53130   0.00000
+HC CT CT OH  opls   0.00000   0.00000   1.95810   0.00000
+HC CT CT HC  opls   0.00000   0.00000   1.33050   0.00000
+HC CT OS CO  opls   0.00000   0.00000   0.31770   0.00000
+CT CT OS CO  opls   2.73630  -1.04600   2.80330   0.00000
+OH CT CT OS  opls  18.07070   0.00000   0.00000   0.00000
+OS CT CT CT  opls  -5.58980   0.00000   0.00000   0.00000
+OS CT CT HC  opls   0.00000   0.00000   1.95810   0.00000
+CT CT CT CT  opls   7.28020  -0.65690   1.16730   0.00000
+CT OS CO OS  opls  -15.4264   0.02090   2.24680   0.00000
+OS CT CT OS  opls  -25.8571   0.00000   0.00000   0.00000
