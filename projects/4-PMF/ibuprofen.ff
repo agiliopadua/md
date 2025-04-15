@@ -1,0 +1,105 @@
+# ibuprofen.ff, version 2023/09/04
+# CL&P molecular force field for ionic liquids
+# J.N. Canongia Lopes, Agilio Padua
+# contributors: K. Shimizu, A. Podgorsek, F. Hammami, L. Gontrani, M. Mishra,
+#               C. Bernardes, K. Goloviznina
+# questions to: agilio.padua@ens-lyon.fr
+#
+# units: kJ/mol, A, deg
+# bond and angle force constants are in the form k/2 (x - x0)^2
+# use 'cons' to indicate constrained bonds and angles
+# in improper dihedrals the central atom is the third in the list
+#
+# use with fftool to build input files for LAMMPS (or DLPOLY, GROMACS, OpenMM)
+ATOMS
+#     typ   m/u       q/e    pot        pars
+CT    CT   12.011    -0.18    lj    3.50   0.27614
+CT2   CT   12.011    -0.12    lj    3.50   0.27614
+CT3   CT   12.011    -0.06    lj    3.50   0.27614
+HC    HC    1.008     0.06    lj    2.50   0.12552
+CA    CA   12.011    -0.115   lj    3.55   0.29288
+CTA   CA   12.011    -0.115   lj    3.55   0.29288
+HA    HA    1.008     0.115   lj    2.42   0.12552
+COH   C     12.011    0.331   lj    3.75   0.43900
+OHC   OHC   15.999   -0.250   lj    3.00   0.71100
+OC3   O_3   15.999   -0.269   lj    2.96   0.87900
+HO    HO    1.008     0.418   lj    0.00   0.00000
+
+BONDS
+# i j    pot    re/A    kr/kJmol-1
+HC  CT   cons   1.090   2845.0
+CT  CT   harm   1.529   2242.0
+CA  CA   harm   1.400   3924.6
+CA  HA   cons   1.080   3071.1
+CA  CT   harm   1.510   2652.7
+CT  C    harm   1.522   2652.6
+C   OHC  harm   1.364   3765.6
+C   O_3  harm   1.229   4769.8
+HO  OHC  cons   0.945   4627.5
+
+ANGLES
+# i j   k    pot    th/deg  ka/kjmol-1
+CT  CT  CT   harm   112.7     488.3
+CT  CT  HC   harm   110.7     313.8
+HC  CT  HC   harm   107.8     276.1
+CA  CA  HA   harm   120.0     292.9
+CA  CA  CA   harm   120.0     527.2
+CA  CA  CT   harm   120.0     585.8
+CA  CT  HC   harm   109.5     418.4
+CA  CT  C    harm   112.000   527.184
+CT  C   OHC  harm   108.000   585.760
+CT  C   O_3  harm   120.400   669.440
+CT  CT  C    harm   111.100   527.184
+C   CT  HC   harm   109.500   292.880
+C   OHC  HO  harm   113.000   292.880
+OHC  C   O_3 harm   121.000   669.440
+CT   CT  CA  harm   114.000   527.184
+CT   CT  OH  harm   109.5     418.4
+HC   CT  OH  harm   109.5     292.9
+CT   OH  HO  harm   108.5     460.2
+
+DIHEDRALS
+# i j   k   l    pot     v1        v2        v3        v4
+HC  CT  CT  HC   opls    0.0000    0.0000    1.2552    0.0000
+CT  CT  CT  HC   opls    0.0000    0.0000    1.2552    0.0000
+CT  CT  CT  CT   opls    5.4392   -0.2092    0.8368    0.0000
+CA  CA  CA  CA   opls    0.0000   30.3340    0.0000    0.0000
+CA  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+HA  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+CT  CA  CA  CA   opls    0.0000   30.3340    0.0000    0.0000
+CT  CA  CA  HA   opls    0.0000   30.3340    0.0000    0.0000
+CA  CT  C   O_3  opls    0.000     2.284     0.000     0.000
+CA  CT  C   OHC  opls    0.000     2.284     0.000     0.000
+CT  C   OHC HO   opls    6.276    23.012     0.000     0.000
+CT  CT  C   OHC  opls    4.184     2.284     1.883     0.000
+CT  CT  C   O_3  opls    0.000     2.284     0.000     0.000
+HC  CT  CT  C    opls    0.000     0.000    -0.418     0.000
+HC  CT  C   OHC  opls    0.000     0.000     0.000     0.000
+HC  CT  C   O_3  opls    0.000     0.000     0.000     0.000
+O_3 C   OHC HO   opls    0.000    23.012     0.000     0.000
+HC  CT  CT  CA   opls   -0.000     0.000     1.933     0.000
+CA  CA  CT  CT   opls    0.000     0.000     0.000     0.000
+CA  CA  CT  C    opls    0.000     0.000     0.000     0.000
+CT  CT  CT  CA   opls    5.439    -0.209     0.837     0.000
+HC  CT  OH  HO   opls    0.0000    0.0000    1.8828    0.0000
+CT  CT  OH  HO   opls   -1.4895   -0.7280    2.0585    0.0000
+HC  CT  CT  OH   opls    0.0000    0.0000    1.9581    0.0000
+OH  CT  CT  OH   opls    0.0000   -9.8324    1.2050    0.0000
+HC  CT  CO  O2   opls    0.0000    0.0000    0.0000    0.0000
+CT  CT  CO  O2   opls    0.0000    3.4309    0.0000    0.0000
+HC  CT  CT  CO   opls    0.0000    0.0000   -0.9414    0.0000
+CT  CT  CT  CO   opls  -13.3260   -3.4518    2.0627    0.0000
+HC  CT  CA  CA   opls    0.0000    0.0000    0.0000    0.0000
+
+IMPROPER
+CA  CA  CA  HA   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  CA  CA   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  CA  CT   opls    0.0000    9.2048    0.0000    0.0000
+CA  CA  NA  CT   opls    0.0000    9.2048    0.0000    0.0000
+CA  NA  CA  HA   opls    0.0000    9.2048    0.0000    0.0000
+CT  O2  CO  O2   opls    0.0000   87.8640    0.0000    0.0000
+O2  O2  CO  CA   opls    0.0000   87.8640    0.0000    0.0000
+CT  OHC C   O_3  opls    0.0000   87.8640    0.0000    0.0000
+
+
+
