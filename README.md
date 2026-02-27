@@ -2,44 +2,53 @@
 
 Course on molecular dynamics, 1st yr masters in Physical Sciences - Sciences de la Matière, ENS de Lyon.
 
-**TODO** add detailed comments to `in.lmp`
-
 ## Working environment and codes
 
-The case studies below make use of Python libraries and simulation codes installed in the machines of the Centre Blaise Pascal, CBP.
+The case studies below make use of Python libraries and simulation codes installed on the machines of the Centre Blaise Pascal, CBP.
 
 ### Python environment
 
-A **conda** installation with the simulation codes and tools is installed in `/projects/DepartementChimie/miniconda3`. To activate it append the contents of the `conda.rc` file (in the `utils` folder) to your `.bashrc` and then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
+A **conda** installation with the simulation codes and tools is installed in `/projects/DepartementChimie/miniforge3`. To activate it append the contents of the `conda.rc` file (in the `utils` folder) to your `.bashrc` and then login again. The `base` environment contains jupyter, numpy, matplolib, etc.
 
 ### Paths to codes on the CBP
 
-* **LAMMPS**: /projects/DepartementChimie/lammps/bin/lmp
+* **OpenMM, mdtraj**: available in the `openmm` conda environment
 
-    Include in your `.bashrc` (and then restart a terminal shell):
+        source /projects/DepartementChimie/conda.rc
 
-        DEPT=/projects/DepartementChimie
-        export LD_LIBRARY_PATH=$DEPT/plumed/lib
-        export PATH=$DEPT/lammps/bin:$PATH
+(you can add the contents of this file to your `.bashrc`)
+        
+        conda activate openmm
 
-* packmol: /usr/bin/packmol (in the PATH)
-* VMD: /usr/local/bin/vmd (in the PATH)
-* Avogadro: /usr/bin/avogadro (in the PATH)
-* Open Babel: /usr/bin/obabel (in the PATH)
-* Gromacs: /usr/bin/gmx (in the PATH)
-* **OpenMM, mdtraj**: in the `omm` conda environment
+* fftool: /projects/DepartementChimie/fftool
 
-        conda activate omm
+        export PATH=/projects/DepartementChimie/fftool:$PATH
+
+(you can add this line to your `.bashrc`)
+
+* packmol: /usr/bin/packmol (in the default PATH)
+* VMD: /usr/local/bin/vmd (in the default PATH)
+* Avogadro: /usr/bin/avogadro (in the default PATH)
+* Open Babel: /usr/bin/obabel (in the default PATH)
+
+
+### GPU
+
+To check your machine's GPU configuration and monitor its usage:
+
+        nvidia-smi
+
+You can select and see the state of the CBP machines on the [Cloud@CBP](https://www.cbp.ens-lyon.fr/python/forms/CloudCBP) web page.
 
 
 ## Study cases
 
 * `ljatoms` -- simple MD code for Lennard-Jones atoms
 * `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
-* `water` -- simulation of water using LAMMPS
-* `solvation` -- simulation of solvation of NaCl and ethelene glycol in water using LAMMPS
+* `water` -- simulation of water using OpenMM
+* `solvation` -- simulation of solvation of NaCl and ethelene glycol in water using OpenMM
 
 
 ## Utilities
 
-Utilities to plot LAMMPS output from `log.lammps, to display the simulation box using VMD, etc. 
+Utilities to improve visualization using VMD or to compute simple quantities from a trajectory.

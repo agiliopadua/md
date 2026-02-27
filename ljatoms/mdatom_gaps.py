@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Molecular dynamics of LJ atoms
+# Molecular dynamics of LJ atoms, with gaps to be filled in
 
 import sys
 import argparse
