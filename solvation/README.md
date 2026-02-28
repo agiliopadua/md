@@ -1,83 +1,36 @@
 # SOLVATION
 
-MD simulations to study the solvation of NaCl and ethelene glycol in water.
+MD simulations to study the solvation of NaCl and of ethelene glycol in water, then study the solvation environments through structural and transport properties.
 
-## Objective
+## Solvation of NaCl
 
-Run simulations to study the solvation environment through structural and transport properties.
+### System setup and equilibration
 
-## Tools and codes
-
-The **fftool** and **packmol** utilities are needed to set up the systems. To perform analysis the python library `MDTraj` will be used. To access all the python libraries activate the `omm` conda environment
-
-    conda activate omm
-
-use **VMD** for visualization
-
-## Simulations
-
-## 1 - Solvation of NaCl
-### 1.0 - Equilibration
 Build a system with 1 ion pair and 500 water molecules at a density slightly lower than that of pure water at 300 K
 
-    fftool 1 na.xyz 1 cl.xyz 500 spce.zmat -r 40
+    fftool 1 Na.xyz 1 Cl.xyz 500 spce.zmat --rho 40
 
-use packmol to pack the nely generated system
+Use packmol to pack the molecules
 
     packmol < pack.inp
 
-and visualize the obtained simulation box
+Visualize the simulation box
 
     vmd simbox.xyz
 
-use fftool to generate the lammps input files.
+Use fftool to generate the OpenMM input files.
 
-    fftool 1 na.xyz 1 cl.xyz 500 spce.zmat -r 40 -l
+    fftool 1 Na.xyz 1 Cl.xyz 500 spce.zmat --rho 40 --xml --mix a
 
-As for the example in water we will run a 100 ps equilibration followed by a 100 ps production trajectory.
-    
-Copy the `in.lmp` file to create `in-eq.lmp`
+Adapt the `omm.py` scripts from the water example to the present system (often very few modifications are necessary). Run a 200 ps equilibration.
 
-    cp in.lmp in-eq.lmp
+Check that energy and density have converged by plotting the respective columns from the output file.
 
-and modify it following the instruction in the [water](../water/) directory.
+### Production run
 
-Run the equilibration using LAMMPS
+Prepare the input script for a 500 ps run starting from the saved equilibrated state. Set the reporter to write 1000 configurations to the trajectory file.
 
-    mpirun -np 8 lmp -in in-eq.lmp > eq.lmp &
-
-Check that energy and density have converged by plotting the respective columns from the `log.lammps` file.
-
-### 1.1 - Production run
-
-Prepare the input script for LAMMPS
-
-    cp in-eq.lmp in-run.lmp
-
-and modify it as for the [water](../water/) case.
-
-Since we are now simulating more than one component, we have to define groups of atoms for which we want to calculate the **MSD**
-
-    group Na type 1
-    group Cl type 2
-    group H2O type 3 4
-
-and the MSD will be now defined by 
-
-    compute MSDNa Na msd
-    compute MSDCl Cl msd
-    compute MSDW H2O msd
-    ...
-    thermo_style ... c_MSDNa[4] c_MSDCl[4] c_MSDW[4]
-
-While for the **RDF** calculation the pairs of interest change. To study the solvation shell of the solvents we calculate the RDF between Na - Ow (`1 4`) and Cl - Ow (`2 4`). Hydrogen bonding between chloride and water can be studied via the RDF between Cl - Hw  (`2 3`).
-
-    compute RDF all rdf 120 1 4 2 4 2 3
-    fix RDF all ave/time 50 2000 100000 c_RDF[*] mode vector file rdf.lmp
-
-dump the trajectory every 100 steps.
-
-### 1.2 - Analysis
+### Trajectory analysis
 
 Perform the following analysis using `MDTraj` as explained in the [analysis](analysis.ipynb) file:
 
@@ -86,58 +39,32 @@ Perform the following analysis using `MDTraj` as explained in the [analysis](ana
 * Combined angular-radial distribution function O - H - Cl
 * MSD of water
 
-compare the results with LAMMPS when possible.
+ 
+## Ehylene glycol + water
 
-## 2 Solvation of ethelene glycol
+Simulate a mixture of ethylene glycol and water with the typical composition of cooling fluid.
 
-### 2.0 - Equilibration
+### System setup and simulations
 
-Build a system with 1 EG molecule and 500 water 
-molecules at a density slightly lower than that of 
-pure water at 300 K
+Build a system with 200 EG molecule and 800 water molecules at a density of 25 mol L<sup>-1</sup>
 
-    fftool 1 EG.zmat 500 spce.zmat -r 40
+    fftool 200 EG.zmat 800 spce.zmat --rho 25 
+    packmol < pack.inp
 
-Pack the system using `packmol` and generate the LAMMPS input files using `fftool` as done in the previous case. 
+If this step takes too long, the initial density may be too high. Reduce a bit and retry.
 
-Copy the `in.lmp` file to create `in-eq.lmp`
+    vmd simbox.xyz
 
-    cp in.lmp in-eq.lmp
+Check that the box looks ok, then create the OpenMM input files
 
-and modify it following the instruction in the 
-[water](../water/) directory.
+    fftool 200 EG.zmat 800 spce.zmat --rho 25 --xml --mix a
 
-Run the equilibration using LAMMPS
+Run equilibration and a production runs.
 
-    mpirun -np 8 lmp -in in-eq.lmp > eq.lmp &
 
-Check that energy and density have converged by 
-plotting the respective columns from the `log.
-lammps` file.
+### Trajectory anaysis
 
-### 2.1 - Production run
-
-Prepare the input script for LAMMPS
-
-    cp in-eq.lmp in-run.lmp
-
-and modify it as for the [water](../water/) case.
-
-While for the **RDF** calculation the pairs of 
-interest change. To study the solvation shell of the 
-solvents we calculate the RDF between C - Ow (`1 
-6`) and OHG - Ow (`2 6`).  
-
-    compute RDF all rdf 120 1 6 2 6 
-    fix RDF all ave/time 50 2000 100000 c_RDF[*] 
-mode vector file rdf.lmp
-
-dump the trajectory every 100 steps and run a 300000 steps trajectory.
-
-### 2.2 - Analysis
-
-Perform the following analysis using `MDTraj` 
-as explained in the [analysis](analysis.ipynb) file:
+Perform the following analysis using `MDTraj`  as explained in the [analysis](analysis.ipynb) file:
 
 * RDF and coordination number of C - Ow
 * RDF and coordination number of OHG - Ow
@@ -150,7 +77,4 @@ function Ow - Hw - OHG
 * Combined angular-radial distribution 
 function OHG - HOG - OHG
 * Dihedral distribution of the O - C - C - O dihedral in EG
-
-
-compare the results with LAMMPS when possible.
 

@@ -45,10 +45,10 @@ You can select and see the state of the CBP machines on the [Cloud@CBP](https://
 
 * `ljatoms` -- simple MD code for Lennard-Jones atoms
 * `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
-* `water` -- simulation of water using OpenMM
-* `solvation` -- simulation of solvation of NaCl and ethelene glycol in water using OpenMM
+* `openmm_basic` -- basic simulation using OpenMM (water)
+* `solvation` -- solvation of simple ions and molecules
 
 
 ## Utilities
 
-Utilities to improve visualization using VMD or to compute simple quantities from a trajectory.
+Utilities to improve visualization using VMD.

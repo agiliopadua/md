@@ -103,8 +103,8 @@ Make a copy of the OpenMM input script `omm-run.py` to:
 
 * density (trivial)
 * enthalpy of vaporization (the intermolecular potential energy plus RT)
-* radial distribution functions using `mdtraj` (Jupyter notebook provided)
 * self-diffusion coefficient from the mean-squared displacement, using `mdtraj` (Jupyter notebook provided)
+* radial distribution functions using `mdtraj` (Jupyter notebook provided)
 * static permittivity (dielectric constant)
 
 

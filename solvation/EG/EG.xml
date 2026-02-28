@@ -1,0 +1,33 @@
+<ForceField>
+ <Atoms>
+  <Atom type="CTO" class="CT" mass="12.011" charge="0.145" potential="lj" sigma="3.50" epsilon="0.27614" />
+  <Atom type="CSO" class="CT" mass="12.011" charge="0.205" potential="lj" sigma="3.50" epsilon="0.27614" />
+  <Atom type="H1O" class="HC" mass="1.008" charge="0.060" potential="lj" sigma="2.50" epsilon="0.12552" />
+  <Atom type="OHG" class="OH" mass="15.999" charge="-0.580" potential="lj" sigma="3.12" epsilon="0.71128" />
+  <Atom type="HOG" class="HO" mass="1.008" charge="0.315" potential="lj" sigma="0.00" epsilon="0.00000" />
+ </Atoms>
+ <Bonds>
+  <Bond class1="HC" class2="CT" potential="cons" length="1.090" k="2845.0" />
+  <Bond class1="CT" class2="CT" potential="harm" length="1.529" k="2242.0" />
+  <Bond class1="CT" class2="OH" potential="harm" length="1.410" k="2677.8" />
+  <Bond class1="HO" class2="OH" potential="cons" length="0.945" k="4627.5" />
+ </Bonds>
+ <Angles>
+  <Angle class1="CT" class2="CT" class3="CT" potential="harm" angle="112.7" k="488.3" />
+  <Angle class1="CT" class2="CT" class3="HC" potential="harm" angle="110.7" k="313.8" />
+  <Angle class1="HC" class2="CT" class3="HC" potential="harm" angle="107.8" k="276.1" />
+  <Angle class1="CT" class2="CT" class3="OH" potential="harm" angle="109.5" k="418.4" />
+  <Angle class1="HC" class2="CT" class3="OH" potential="harm" angle="109.5" k="292.9" />
+  <Angle class1="CT" class2="OH" class3="HO" potential="harm" angle="108.5" k="460.2" />
+ </Angles>
+ <Torsions>
+  <Proper class1="HC" class2="CT" class3="CT" class4="HC" potential="opls" v1="0.0000" v2="0.0000" v3="1.2552" v4="0.0000" />
+  <Proper class1="CT" class2="CT" class3="CT" class4="HC" potential="opls" v1="0.0000" v2="0.0000" v3="1.2552" v4="0.0000" />
+  <Proper class1="CT" class2="CT" class3="CT" class4="CT" potential="opls" v1="5.4392" v2="-0.2092" v3="0.8368" v4="0.0000" />
+  <Proper class1="HC" class2="CT" class3="OH" class4="HO" potential="opls" v1="0.0000" v2="0.0000" v3="1.8828" v4="0.0000" />
+  <Proper class1="CT" class2="CT" class3="OH" class4="HO" potential="opls" v1="-1.4895" v2="-0.7280" v3="2.0585" v4="0.0000" />
+  <Proper class1="HC" class2="CT" class3="CT" class4="OH" potential="opls" v1="0.0000" v2="0.0000" v3="1.9581" v4="0.0000" />
+  <Proper class1="OH" class2="CT" class3="CT" class4="OH" potential="opls" v1="0.0000" v2="-9.8324" v3="1.2050" v4="0.0000" />
+  <Proper class1="CT" class2="CT" class3="CT" class4="OH" potential="opls" v1="7.1588" v2="-2.0920" v3="2.7740" v4="0.000" />
+ </Torsions>
+</ForceField>

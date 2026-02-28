@@ -1,0 +1,37 @@
+<ForceField>
+ <!--created by fftool; mix = a-->
+ <AtomTypes>
+  <Type name="Na" class="Na" element="Na" mass="22.9900" />
+  <Type name="Cl" class="Cl" element="Cl" mass="35.4530" />
+  <Type name="Hw" class="Hw" element="H" mass="1.0080" />
+  <Type name="Ow" class="Ow" element="O" mass="15.9990" />
+ </AtomTypes>
+ <Residues>
+  <Residue name="Na">
+   <Atom name="Na" type="Na" charge="1.0" />
+  </Residue>
+  <Residue name="Cl">
+   <Atom name="Cl" type="Cl" charge="-1.0" />
+  </Residue>
+  <Residue name="SPCE">
+   <Atom name="H1" type="Hw" charge="0.4238" />
+   <Atom name="O" type="Ow" charge="-0.8476" />
+   <Atom name="H2" type="Hw" charge="0.4238" />
+   <Bond atomName1="O" atomName2="H1" />
+   <Bond atomName1="H2" atomName2="O" />
+  </Residue>
+ </Residues>
+ <HarmonicBondForce>
+  <Bond class1="Ow" class2="Hw" length="0.10000" k="433153.00" />
+ </HarmonicBondForce>
+ <HarmonicAngleForce>
+  <Angle class1="Hw" class2="Ow" class3="Hw" angle="1.91061" k="317.57" />
+ </HarmonicAngleForce>
+ <NonbondedForce coulomb14scale="0.5" lj14scale="0.5">
+  <UseAttributeFromResidue name="charge" />
+  <Atom type="Na" sigma="0.33300" epsilon="0.01160" />
+  <Atom type="Cl" sigma="0.44172" epsilon="0.49283" />
+  <Atom type="Hw" sigma="0.10000" epsilon="0.00000" />
+  <Atom type="Ow" sigma="0.31655" epsilon="0.65030" />
+ </NonbondedForce>
+</ForceField>
