@@ -29,6 +29,7 @@ A **conda** installation with the simulation codes and tools is installed in `/p
 * packmol: /usr/bin/packmol (in the default PATH)
 * VMD: /usr/local/bin/vmd (in the default PATH)
 * Avogadro: /usr/bin/avogadro (in the default PATH)
+* VESTA: /usr/local/bin/VESTA (in the default PATH)
 * Open Babel: /usr/bin/obabel (in the default PATH)
 
 
@@ -46,9 +47,11 @@ You can select and see the state of the CBP machines on the [Cloud@CBP](https://
 * `ljatoms` -- simple MD code for Lennard-Jones atoms
 * `ljmols` -- simple MD code for 2-site Lennard-Jones molecules
 * `openmm_basic` -- basic simulation using OpenMM (water)
+* `ionicliquid` -- a room-temperature molten salt
 * `solvation` -- solvation of simple ions and molecules
+* `surface` -- graphene and graphite surfaces
 
 
 ## Utilities
 
-Utilities to improve visualization using VMD.
+Utilities to improve visualization using VMD, print auxilliary quantities, etc.

@@ -1,0 +1,16 @@
+
+display projection orthographic
+display nearclip set 0.010000
+
+animate goto start
+
+pbc box
+pbc wrap -all
+pbc join fragment -bondlist -all
+
+mol addrep 0
+
+mol modselect 0 0 residue 0 1
+mol modstyle 0 0 DynamicBonds 1.6 0.3 8.0
+
+mol modselect 1 0 not residue 0 1

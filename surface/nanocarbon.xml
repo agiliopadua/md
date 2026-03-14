@@ -1,0 +1,55 @@
+<ForceField>
+ <Atoms>
+  <Atom type="CA" class="CA" mass="12.011" charge="-0.115" potential="lj" sigma="3.55" epsilon="0.29288" />
+  <Atom type="HA" class="HA" mass="1.008" charge="0.115" potential="lj" sigma="2.42" epsilon="0.12552" />
+  <Atom type="CB" class="CA" mass="12.011" charge="0.000" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CGZ" class="CA" mass="12.011" charge="-0.115" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CGA" class="CA" mass="12.011" charge="-0.115" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CGM" class="CA" mass="12.011" charge="0.000" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CG" class="CA" mass="12.011" charge="0.000" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="HGZ" class="HA" mass="1.008" charge="0.115" potential="lj" sigma="2.42" epsilon="0.12552" />
+  <Atom type="HGA" class="HA" mass="1.008" charge="0.115" potential="lj" sigma="2.42" epsilon="0.12552" />
+  <Atom type="CNT" class="CA" mass="12.011" charge="0.000" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="HNT" class="HA" mass="1.008" charge="0.115" potential="lj" sigma="2.42" epsilon="0.12552" />
+  <Atom type="CNA" class="CA" mass="12.011" charge="-0.115" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CNZ" class="CA" mass="12.011" charge="-0.115" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="CNM" class="CA" mass="12.011" charge="0.000" potential="lj" sigma="3.47" epsilon="0.27640" />
+  <Atom type="F" class="F" mass="18.998" charge="-0.12" potential="lj" sigma="2.95" epsilon="0.22175" />
+  <Atom type="CF" class="CF" mass="12.011" charge="0.12" potential="lj" sigma="3.50" epsilon="0.27614" />
+ </Atoms>
+ <Bonds>
+  <Bond class1="CA" class2="CA" potential="harm" length="1.430" k="3924.6" />
+  <Bond class1="CA" class2="HA" potential="cons" length="1.080" k="3071.1" />
+  <Bond class1="F" class2="CF" potential="harm" length="1.38" k="3071.1" />
+  <Bond class1="CF" class2="CF" potential="harm" length="1.60" k="2242.6" />
+  <Bond class1="CF" class2="CA" potential="harm" length="1.52" k="2500.0" />
+ </Bonds>
+ <Angles>
+  <Angle class1="CA" class2="CA" class3="CA" potential="harm" angle="120.00" k="527.18" />
+  <Angle class1="CA" class2="CA" class3="HA" potential="harm" angle="120.00" k="292.88" />
+  <Angle class1="F" class2="CF" class3="CF" potential="harm" angle="109.5" k="418.4" />
+  <Angle class1="CF" class2="CF" class3="CF" potential="harm" angle="112.7" k="488.3" />
+  <Angle class1="F" class2="CF" class3="CA" potential="harm" angle="109.5" k="418.4" />
+  <Angle class1="CF" class2="CF" class3="CA" potential="harm" angle="112.7" k="488.3" />
+  <Angle class1="CF" class2="CA" class3="CF" potential="harm" angle="112.7" k="488.3" />
+  <Angle class1="CF" class2="CA" class3="CA" potential="harm" angle="112.7" k="488.3" />
+ </Angles>
+ <Torsions>
+  <Proper class1="CA" class2="CA" class3="CA" class4="CA" potential="opls" v1="0.0000" v2="30.334" v3="0.0000" v4="0.0000" />
+  <Proper class1="CA" class2="CA" class3="CA" class4="HA" potential="opls" v1="0.0000" v2="30.334" v3="0.0000" v4="0.0000" />
+  <Proper class1="HA" class2="CA" class3="CA" class4="HA" potential="opls" v1="0.0000" v2="30.334" v3="0.0000" v4="0.0000" />
+  <Proper class1="F" class2="CF" class3="CF" class4="F" potential="opls" v1="-10.4600" v2="0.0000" v3="1.0460" v4="0.0000" />
+  <Proper class1="F" class2="CF" class3="CF" class4="CF" potential="opls" v1="1.2552" v2="0.0000" v3="1.6736" v4="0.0000" />
+  <Proper class1="CF" class2="CF" class3="CF" class4="CF" potential="opls" v1="27.7064" v2="3.9664" v3="-5.8074" v4="-8.8617" />
+  <Proper class1="F" class2="CF" class3="CF" class4="CA" potential="opls" v1="1.2552" v2="0.0000" v3="1.6736" v4="0.0000" />
+  <Proper class1="F" class2="CF" class3="CA" class4="CF" potential="opls" v1="1.2552" v2="0.0000" v3="1.6736" v4="0.0000" />
+  <Proper class1="F" class2="CF" class3="CA" class4="CA" potential="opls" v1="1.2552" v2="0.0000" v3="1.6736" v4="0.0000" />
+  <Proper class1="CF" class2="CF" class3="CF" class4="CA" potential="opls" v1="27.7064" v2="3.9664" v3="-5.8074" v4="-8.8617" />
+  <Proper class1="CF" class2="CF" class3="CA" class4="CF" potential="opls" v1="27.7064" v2="3.9664" v3="-5.8074" v4="-8.8617" />
+  <Proper class1="CF" class2="CF" class3="CA" class4="CA" potential="opls" v1="27.7064" v2="3.9664" v3="-5.8074" v4="-8.8617" />
+  <Proper class1="CF" class2="CA" class3="CA" class4="CF" potential="opls" v1="27.7064" v2="3.9664" v3="-5.8074" v4="-8.8617" />
+ </Torsions>
+ <Torsions>
+  <Improper class1="CA" class2="CA" class3="CA" class4="HA" potential="opls" v1="0.0000" v2="9.2048" v3="0.0000" v4="0.0000" />
+ </Torsions>
+</ForceField>
