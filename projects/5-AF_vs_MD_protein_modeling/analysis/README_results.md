@@ -18,9 +18,9 @@ The analysis extracts several structural and dynamical quantities from the traje
 
 It is computed using the **Cα atoms** of the protein backbone.
 
-\[
-RMSD(t) = \sqrt{\frac{1}{N}\sum_{i=1}^{N} (r_i(t) - r_i^{ref})^2}
-\]
+$$
+\rm {RMSD}(t) = \sqrt{\frac{1}{N}\sum_{i=1}^{N} (r_i(t) - r_i^{ref})^2}
+$$
 
 RMSD provides information about **structural stability during the simulation**.
 
@@ -36,9 +36,9 @@ RMSD provides information about **structural stability during the simulation**.
 
 **RMSF** measures the flexibility of each residue during the trajectory.
 
-\[
-RMSF(i) = \sqrt{\langle (r_i - \langle r_i \rangle)^2 \rangle}
-\]
+$$
+\rm{RMSF}(i) = \sqrt{\langle (r_i - \langle r_i \rangle)^2 \rangle}
+$$
 
 It is computed for **backbone atoms** and plotted as a function of residue index.
 
@@ -54,9 +54,9 @@ It is computed for **backbone atoms** and plotted as a function of residue index
 
 The **radius of gyration** measures the overall compactness of the protein.
 
-\[
+$$
 R_g = \sqrt{\frac{\sum_i m_i (r_i - r_{COM})^2}{\sum_i m_i}}
-\]
+$$
 
 This quantity describes how **compact or expanded** the protein structure is during the simulation.
 
@@ -107,9 +107,9 @@ Each residue is classified as:
 
 For each residue, the script calculates the **fraction of simulation time spent in each structure type**.
 
-\[
-Fraction = \frac{\text{Number of frames with structure}}{\text{Total frames}}
-\]
+$$
+\rm{Fraction} = \frac{\text{Number of frames with structure}}{\text{Total frames}}
+$$
 
 **Questions for students**
 
