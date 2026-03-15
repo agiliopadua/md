@@ -1,0 +1,25 @@
+; minim.mdp
+; Energy minimization to remove steric clashes and bad contacts
+
+integrator      = steep      ; Steepest descent algorithm
+emtol           = 1000.0     ; Convergence criterion for maximum force
+emstep          = 0.01       ; Maximum step size during minimization
+nsteps          = 50000      ; Maximum number of minimization steps
+
+cutoff-scheme   = Verlet     ; Neighbor searching algorithm
+nstlist         = 20         ; Update neighbor list every 20 steps
+
+; ---- Electrostatics ----
+coulombtype     = PME        ; Particle Mesh Ewald for accurate long-range electrostatics
+rcoulomb        = 1.2        ; Electrostatic cutoff distance (nm)
+pme-order       = 4          ; Interpolation order used in PME grid
+fourierspacing  = 0.12       ; Grid spacing for FFT mesh (nm)
+
+; ---- Van der Waals interactions (CHARMM standard) ----
+vdw-modifier    = force-switch ; Use force switching function
+rvdw-switch     = 1.0          ; Switching starts at 1.0 nm
+rvdw            = 1.2          ; LJ potential becomes zero at 1.2 nm
+
+constraints     = h-bonds    ; Constrain bonds involving hydrogens
+
+pbc             = xyz        ; Periodic boundary conditions

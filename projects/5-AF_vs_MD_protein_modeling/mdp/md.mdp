@@ -1,0 +1,47 @@
+; md.mdp
+; Production molecular dynamics simulation
+
+integrator      = md        ; Molecular dynamics integrator
+dt              = 0.002     ; Time step (2 fs)
+nsteps          = 20000000   ; Total simulation time = 40 ns
+
+; ---- Output control ----
+nstxout-compressed = 1000   ; Save trajectory every 2 ps
+nstenergy       = 1000      ; Save energies every 2 ps
+nstlog          = 1000      ; Write log output every 2 ps
+
+cutoff-scheme   = Verlet
+nstlist         = 20
+
+; ---- Electrostatics ----
+coulombtype     = PME
+rcoulomb        = 1.2
+pme-order       = 4
+fourierspacing  = 0.12
+
+; ---- Van der Waals interactions ----
+vdw-modifier    = force-switch
+rvdw-switch     = 1.0
+rvdw            = 1.2
+
+; ---- Temperature control ----
+tcoupl          = V-rescale
+tc-grps         = Protein Water_and_ions
+tau_t           = 0.1     0.1
+ref_t           = 300     300
+
+; ---- Pressure control ----
+pcoupl          = Parrinello-Rahman
+pcoupltype      = isotropic
+tau_p           = 2.0
+ref_p           = 1.0
+compressibility = 4.5e-5
+
+; ---- Constraints ----
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+
+pbc             = xyz
+
+gen_vel         = no     ; Continue velocities from previous step
