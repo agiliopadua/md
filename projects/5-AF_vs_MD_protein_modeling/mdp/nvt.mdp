@@ -1,0 +1,47 @@
+; nvt.mdp
+; Equilibration at constant number of particles, volume, and temperature
+
+integrator      = md         ; Molecular dynamics integrator
+dt              = 0.002      ; Time step = 2 fs
+nsteps          = 50000      ; 100 ps simulation
+
+; ---- Output control ----
+nstxout-compressed = 1000    ; Save coordinates every 1000 steps (~2 ps)
+nstenergy       = 1000       ; Save energy every 1000 steps
+nstlog          = 1000       ; Write log file information every 1000 steps
+
+cutoff-scheme   = Verlet     ; Neighbor searching scheme
+nstlist         = 20         ; Update neighbor list every 20 steps
+
+; ---- Electrostatics ----
+coulombtype     = PME
+rcoulomb        = 1.2
+pme-order       = 4
+fourierspacing  = 0.12
+
+; ---- Van der Waals interactions ----
+vdw-modifier    = force-switch
+rvdw-switch     = 1.0
+rvdw            = 1.2
+
+; ---- Temperature control ----
+tcoupl          = V-rescale  ; Velocity rescaling thermostat
+tc-grps         = Protein Water_and_ions ; Separate temperature coupling groups
+tau_t           = 0.1     0.1 ; Coupling constant for thermostat (ps)
+ref_t           = 300     300 ; Target temperature (K)
+
+; ---- Pressure control ----
+pcoupl          = no         ; No pressure coupling in NVT phase
+
+; ---- Constraints ----
+constraints             = h-bonds ; Constrain bonds involving hydrogen atoms
+constraint-algorithm    = lincs   ; LINCS algorithm for constraints
+lincs-order             = 4       ; Expansion order of LINCS
+lincs-iter              = 1       ; Number of constraint iterations
+
+pbc             = xyz        ; Periodic boundary conditions
+
+; ---- Velocity initialization ----
+gen_vel         = yes        ; Generate initial velocities
+gen_temp        = 300        ; Temperature for velocity generation
+gen_seed        = -1         ; Random seed (-1 lets GROMACS choose)
