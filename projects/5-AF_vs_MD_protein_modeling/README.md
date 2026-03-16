@@ -17,7 +17,7 @@ Two systems are studied and compared:
 - **HP36** – a small, well-folded protein
 - **p53 TAD** – an intrinsically disordered protein domain
 
-By comparing these systems, students will explore how **protein flexibility and disorder appear in MD simulations** and how this relates to **confidence scores from AlphaFold**.
+By comparing these systems, you will explore how **protein flexibility and disorder appear in MD simulations** and how this relates to **confidence scores from AlphaFold**.
 
 ---
 
@@ -230,7 +230,7 @@ Analyze trajectories with Python
 
 # Learning Objectives
 
-By completing this tutorial students will learn:
+By completing this tutorial you will learn:
 
 - how to generate protein structures using **AlphaFold**
 - how to run **molecular dynamics simulations with GROMACS**
