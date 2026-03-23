@@ -20,6 +20,9 @@ The workflow performs the following steps:
 ```bash
 #!/bin/bash
 
+# upload GROMACS
+source /DAMM/software/gromacs_teaching_room/trixie/AVX_256/
+
 folder_name=$1
 # step 0: in each simulation folder place the FF folder: charmm36-jul2022.ff
 # Process the AF configuration file
