@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # upload GROMACS
-source /DAMM/software/gromacs_teaching_room/trixie/AVX_256/
+source /DAMM/software/gromacs_teaching_room/trixie/AVX_256/gromacs-2025.3/bin/GMXRC
 
 folder_name=$1
 # step 0: in each simulation folder place the FF folder: charmm36-jul2022.ff
