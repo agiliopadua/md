@@ -35,9 +35,11 @@ gnuplot for visualization
 
 Use the final configuration obtained in [solvation](../solvation) to run the umbrella simulation.
 
-Modify the `in-pmf.lmp` reading [LAMMPS documentation](https://docs.lammps.org/Manual.html) to run the umbrella simulation.
+Modify the `omm-umbrella.py` to run the umbrella sampling simulation with OpenMM. A tutorial for PMF calculations with OpenMM is available at the [OpenMM Cookbook](https://openmm.github.io/openmm-cookbook/latest/notebooks/tutorials/umbrella_sampling.html).
 
-plot the histograms using gnuplot:
+If using LAMMPS, modify `in-pmf.lmp` reading [LAMMPS documentation](https://docs.lammps.org/Manual.html) to run the umbrella simulation.
+
+Then plot the histograms using gnuplot:
     
     gnuplot> load "hist.gp"
 
