@@ -1,0 +1,46 @@
+; npt.mdp
+; Equilibration at constant number of particles, pressure, and temperature
+
+integrator      = md
+dt              = 0.002
+nsteps          = 50000      ; 100 ps simulation
+
+; ---- Output control ----
+nstxout-compressed = 1000
+nstenergy       = 1000
+nstlog          = 1000
+
+cutoff-scheme   = Verlet
+nstlist         = 20
+
+; ---- Electrostatics ----
+coulombtype     = PME
+rcoulomb        = 1.2
+pme-order       = 4
+fourierspacing  = 0.12
+
+; ---- Van der Waals interactions ----
+vdw-modifier    = force-switch
+rvdw-switch     = 1.0
+rvdw            = 1.2
+
+; ---- Temperature control ----
+tcoupl          = V-rescale
+tc-grps         = Protein Water_and_ions
+tau_t           = 0.1     0.1
+ref_t           = 300     300
+
+; ---- Pressure control ----
+pcoupl          = Parrinello-Rahman ; Barostat suitable for production simulations
+pcoupltype      = isotropic         ; Uniform scaling of box in all directions
+tau_p           = 2.0               ; Pressure coupling time constant (ps)
+ref_p           = 1.0               ; Target pressure (bar)
+compressibility = 4.5e-5            ; Compressibility of water (bar^-1)
+
+constraints             = h-bonds
+constraint-algorithm    = lincs
+lincs-order             = 4
+
+pbc             = xyz
+
+gen_vel         = no        ; Do not regenerate velocities (continue simulation)

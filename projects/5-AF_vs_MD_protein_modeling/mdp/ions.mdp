@@ -1,0 +1,18 @@
+; ions.mdp
+; Minimal input file used when preparing the system to add ions
+
+integrator      = steep      ; Use steepest descent minimization algorithm
+emtol           = 1000.0     ; Stop minimization when max force < 1000 kJ/mol/nm
+nsteps          = 500        ; Maximum number of minimization steps
+
+cutoff-scheme   = Verlet     ; Neighbor searching scheme (recommended in modern GROMACS)
+nstlist         = 20         ; Update neighbor list every 20 steps
+
+coulombtype     = PME        ; Use Particle Mesh Ewald for long-range electrostatics
+rcoulomb        = 1.2        ; Short-range electrostatic cutoff (nm)
+
+vdw-modifier    = force-switch ; Smoothly switch Lennard-Jones interactions
+rvdw-switch     = 1.0          ; Switching starts at 1.0 nm
+rvdw            = 1.2          ; LJ interactions go to zero at 1.2 nm
+
+pbc             = xyz        ; Apply periodic boundary conditions in x,y,z
