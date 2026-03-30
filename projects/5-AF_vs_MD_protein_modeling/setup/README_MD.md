@@ -53,6 +53,10 @@ gmx mdrun -deffnm npt -v
 gmx grompp -f ../mdp/md.mdp -c npt.gro -p topol.top -o md.tpr
 gmx mdrun -deffnm md -v
 
+# Create a trajectory for the analysis
+gmx trjconv -s md.tpr -f md.xtc -o md_peptide_no_pbc_center.xtc -center -pbc mol
+gmx trjconv -s md.tpr -f md.xtc -o md_peptide_no_pbc_center.pdb -center -pbc mol -dump 0
+
 ```
 # How to Run the Script:
 
